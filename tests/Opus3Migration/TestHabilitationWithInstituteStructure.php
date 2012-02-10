@@ -31,7 +31,7 @@
  * @version     $Id$
  */
 
-class Opus3Migration_Testdump7Test extends MigrationTestCase {
+class Opus3Migration_TestHabilitationWithInstituteStructure extends MigrationTestCase {
 
     protected $doc;
 
@@ -48,9 +48,24 @@ class Opus3Migration_Testdump7Test extends MigrationTestCase {
         $this->assertEquals($this->doc->getType(), 'habilitation');
     }
 
-    public function testTitleAdditionalGermanFromOpusDiss() {
-        $this->assertEquals($this->doc->getTitleAdditional(0)->getValue(), 'Testhabilitation (deu)');
-        $this->assertEquals($this->doc->getTitleAdditional(0)->getLanguage(), 'deu');
+    public function testTitleMainEnglish() {
+        $this->assertEquals($this->doc->getTitleMain(0)->getValue(), 'Testhabilitation (eng)');
+        $this->assertEquals($this->doc->getTitleMain(0)->getLanguage(), 'eng');
+    }
+
+    public function testTitleMainGerman() {
+        $this->assertEquals($this->doc->getTitleMain(1)->getValue(), 'Testhabilitation (deu)');
+        $this->assertEquals($this->doc->getTitleMain(1)->getLanguage(), 'deu');
+    }
+
+    public function testTitleAbstractEnglish() {
+        $this->assertEquals($this->doc->getTitleAbstract(0)->getValue(), 'This is a testdocument for for document type habilitation.');
+        $this->assertEquals($this->doc->getTitleAbstract(0)->getLanguage(), 'eng');
+    }
+
+    public function testTitleAbstractGerman() {
+        $this->assertEquals($this->doc->getTitleAbstract(1)->getValue(), 'Das ist ein Testdokument für den Dokumenttyp Habilitation.');
+        $this->assertEquals($this->doc->getTitleAbstract(1)->getLanguage(), 'deu');
     }
 
     public function testInstituteStructure() {
