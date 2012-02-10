@@ -31,25 +31,12 @@
  * @version     $Id$
  */
 
-
-/**
- * Description of Testdump14Test
- * - Dokumenttyp: Dissertation
- * - Sprache: english
- * - Originaltitel der Arbeit
- * - Titel der Arbeit in Englisch
- * - Titel der Arbeit in Deutsch
- * - Kurze Inhaltszusammenfassung in der Originalsprache (deutsch)
- * - Kurze Inhaltszusammenfassung in einer weiteren Sprache (english)
- *
- * @author gunar
- */
-class Opus3Migration_TestDoctoralthesisWithManyTitle3 extends MigrationTestCase {
+class Opus3Migration_ImageSeriesTest extends MigrationTestCase {
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
-        parent::migrate("testdump_14.xml");
+        parent::migrate("testdump_6.xml");
     }
 
     public function setUp() {
@@ -57,33 +44,48 @@ class Opus3Migration_TestDoctoralthesisWithManyTitle3 extends MigrationTestCase 
         $this->doc = new Opus_Document(1);
     }
 
-    public function testDoctypeDoctoralThesis() {
-        $this->assertEquals($this->doc->getType(), 'doctoralthesis');
+    public function testDoctypeImage() {
+        $this->assertEquals($this->doc->getType(), 'image');
     }
 
-    public function testTitleMainEnglish() {
-        $this->assertEquals($this->doc->getTitleMain(0)->getValue(), 'English Title');
-        $this->assertEquals($this->doc->getTitleMain(0)->getLanguage(), 'eng');
+    public function testAlphabeticalSortOrderOfSeries() {
+        // Schrfitenreihen sollen alphabetisch migriert werden
+        $series = Opus_Series::getAllSortedBySortKey();
+        $this->assertEquals($series[0]->getTitle(), 'Allererste Schriftenreihe');
+        $this->assertEquals($series[1]->getTitle(), 'Schriftenreihe 2');
+        $this->assertEquals($series[2]->getTitle(), 'Testschriftenreihe');
+        $this->assertEquals($series[3]->getTitle(), 'Zusätzliche Schriftenreihe');
     }
 
-    public function testTitleMainGerman() {
-        $this->assertEquals($this->doc->getTitleMain(1)->getValue(), 'Deutscher Titel');
-        $this->assertEquals($this->doc->getTitleMain(1)->getLanguage(), 'deu');
+    public function testSeriesTitle() {
+        $series = new Opus_Series(1);
+        $this->assertEquals($series->getTitle(), 'Allererste Schriftenreihe');
+        $series = new Opus_Series(2);
+        $this->assertEquals($series->getTitle(), 'Schriftenreihe 2');
+        $series = new Opus_Series(3);
+        $this->assertEquals($series->getTitle(), 'Testschriftenreihe');
+        $series = new Opus_Series(4);
+        $this->assertEquals($series->getTitle(), 'Zusätzliche Schriftenreihe');
+
     }
 
-    public function testTitleAbstractEnglish() {
-        $this->assertEquals($this->doc->getTitleAbstract(0)->getValue(), 'Short Abstract');
-        $this->assertEquals($this->doc->getTitleAbstract(0)->getLanguage(), 'eng');
+    public function testSeriesVisibility() {
+        $series = new Opus_Series(1);
+        $this->assertEquals($series->getVisible(), '1');
+        $series = new Opus_Series(2);
+        $this->assertEquals($series->getVisible(), '1');
+        $series = new Opus_Series(3);
+        $this->assertEquals($series->getVisible(), '1');
+        $series = new Opus_Series(4);
+        $this->assertEquals($series->getVisible(), '1');
     }
 
-    public function testTitleAbstractGerman() {
-        $this->assertEquals($this->doc->getTitleAbstract(1)->getValue(), 'Kurze Zusammenfassung');
-        $this->assertEquals($this->doc->getTitleAbstract(1)->getLanguage(), 'deu');
+    public function testSeriesHoldsDocumentAndNumber() {
+        //$series = new Opus_Series(1);
+        $assignedSeries = $this->doc->getSeries();
+        $this->assertEquals($assignedSeries[0]->getTitle(), 'Testschriftenreihe');
+        $this->assertEquals($assignedSeries[0]->getNumber(), '2012,01');
     }
 
-    public function testTitleAdditionalEnglish() {
-        $this->assertEquals($this->doc->getTitleAdditional(0)->getValue(), 'Another english title');
-        $this->assertEquals($this->doc->getTitleAdditional(0)->getLanguage(), 'eng');
-    }
 }
-?>
+

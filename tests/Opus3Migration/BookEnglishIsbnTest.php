@@ -31,12 +31,12 @@
  * @version     $Id$
  */
 
-class Opus3Migration_Testdump8Test extends MigrationTestCase {
+class Opus3Migration_BookEnglishIsbnTest extends MigrationTestCase {
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
-        parent::migrate("testdump_8.xml");
+        parent::migrate("testdump_2.xml");
     }
 
     public function setUp() {
@@ -44,23 +44,24 @@ class Opus3Migration_Testdump8Test extends MigrationTestCase {
         $this->doc = new Opus_Document(1);
     }
 
-    public function testDoctypeStudyThesis() {
-        $this->assertEquals($this->doc->getType(), 'studythesis');
+    public function testDoctypeBook() {
+        $this->assertEquals($this->doc->getType(), 'book');
     }
 
-    public function testCollectionMsc() {
-        $msc_collections = Opus_Collection::fetchCollectionsByRoleNumber('6', '51H10');
-        $this->assertTrue($msc_collections[0]->holdsDocumentById($this->doc->getId()));
 
-        $msc_collections = Opus_Collection::fetchCollectionsByRoleNumber('6', '90B06');
-        $this->assertTrue($msc_collections[0]->holdsDocumentById($this->doc->getId()));
-
-        $msc_collections = Opus_Collection::fetchCollectionsByRoleNumber('6', '90B90');
-        $this->assertTrue($msc_collections[0]->holdsDocumentById($this->doc->getId()));
-
-        $msc_collections = Opus_Collection::fetchCollectionsByRoleNumber('6', '05D99');
-        $this->assertTrue($msc_collections[0]->holdsDocumentById($this->doc->getId()));
+    public function testTitleMainEnglish() {
+        $this->assertEquals($this->doc->getTitleMain(1)->getValue(), 'Testbook');
+        $this->assertEquals($this->doc->getTitleMain(1)->getLanguage(), 'eng');
     }
+
+    public function testTitleAbstractEnglish() {
+        $this->assertEquals($this->doc->getTitleAbstract(1)->getValue(), 'This is a testbook.');
+        $this->assertEquals($this->doc->getTitleAbstract(1)->getLanguage(), 'eng');
+    }
+
+    public function testIdentifierIsbn() {
+        $this->assertEquals($this->doc->getIdentifierIsbn(0)->getValue(), '123-123-123');
+    }    
 
 }
 

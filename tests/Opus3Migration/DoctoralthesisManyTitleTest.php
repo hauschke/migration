@@ -31,12 +31,26 @@
  * @version     $Id$
  */
 
-class Opus3Migration_Testdump3Test extends MigrationTestCase {
+/**
+ * Description:
+ * - Dokumenttyp: Dissertation
+ * - Sprache: deutsch
+ * - Originaltitel der Arbeit
+ * - Titel der Arbeit in Englisch
+ * - Titel der Arbeit in Deutsch
+ * - Kurze Inhaltszusammenfassung in der Originalsprache (deutsch)
+ * - Kurze Inhaltszusammenfassung in einer weiteren Sprache (english)
+ *
+ * @author gunar
+ */
+
+
+class Opus3Migration_DoctoralthesisManyTitleTest extends MigrationTestCase {
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
-        parent::migrate("testdump_3.xml");
+        parent::migrate("testdump_12.xml");
     }
 
     public function setUp() {
@@ -44,26 +58,34 @@ class Opus3Migration_Testdump3Test extends MigrationTestCase {
         $this->doc = new Opus_Document(1);
     }
 
-    public function testDoctypeBookpart() {
-        $this->assertEquals($this->doc->getType(), 'bookpart');
+    public function testDoctypeDoctoralThesis() {
+        $this->assertEquals($this->doc->getType(), 'doctoralthesis');
     }
 
-    public function testMultipleAuthors() {
-        $this->assertEquals($this->doc->getPersonAuthor(0)->getFirstName(), 'John');
-        $this->assertEquals($this->doc->getPersonAuthor(0)->getLastName(), 'Doe');
-        $this->assertEquals($this->doc->getPersonAuthor(0)->getSortOrder(), '1');
-        $this->assertEquals($this->doc->getPersonAuthor(1)->getFirstName(), 'Jane');
-        $this->assertEquals($this->doc->getPersonAuthor(1)->getLastName(), 'Doe');
-        $this->assertEquals($this->doc->getPersonAuthor(1)->getSortOrder(), '2');
-        $this->assertEquals($this->doc->getPersonAuthor(2)->getFirstName(), 'Max');
-        $this->assertEquals($this->doc->getPersonAuthor(2)->getLastName(), 'Mustermann');
-        $this->assertEquals($this->doc->getPersonAuthor(2)->getSortOrder(), '3');
+    public function testTitleMainGerman() {
+        $this->assertEquals($this->doc->getTitleMain(0)->getValue(), 'Testarbeit Diss');
+        $this->assertEquals($this->doc->getTitleMain(0)->getLanguage(), 'deu');
     }
 
-    public function testEnrichmentSourceTitle() {
-        $this->assertEquals($this->doc->getEnrichment(0)->getKeyName(), 'SourceTitle');
-        $this->assertEquals($this->doc->getEnrichment(0)->getValue(), 'Buch des Testkapitels');
+    public function testTitleMainEnglish() {
+        $this->assertEquals($this->doc->getTitleMain(1)->getValue(), 'Workingtitle in english');
+        $this->assertEquals($this->doc->getTitleMain(1)->getLanguage(), 'eng');
     }
+
+    public function testTitleAbstractGerman() {
+        $this->assertEquals($this->doc->getTitleAbstract(0)->getValue(), 'Inhalt deutsch');
+        $this->assertEquals($this->doc->getTitleAbstract(0)->getLanguage(), 'deu');
+    }
+
+    public function testTitleAbstractEnglish() {
+        $this->assertEquals($this->doc->getTitleAbstract(1)->getValue(), 'Inhalt englisch');
+        $this->assertEquals($this->doc->getTitleAbstract(1)->getLanguage(), 'eng');
+    }
+
+    public function testTitleAdditionalGerman() {
+        $this->assertEquals($this->doc->getTitleAdditional(0)->getValue(), 'Titel der Arbeit in Deutsch');
+        $this->assertEquals($this->doc->getTitleAdditional(0)->getLanguage(), 'deu');
+    }
+
 
 }
-

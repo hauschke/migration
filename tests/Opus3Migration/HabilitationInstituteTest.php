@@ -31,7 +31,7 @@
  * @version     $Id$
  */
 
-class Opus3Migration_TestHabilitationWithInstituteStructure extends MigrationTestCase {
+class Opus3Migration_HabilitationInstituteTest extends MigrationTestCase {
 
     protected $doc;
 

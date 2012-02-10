@@ -31,7 +31,7 @@
  * @version     $Id$
  */
 
-class Opus3Migration_Testdump4Test extends MigrationTestCase {
+class Opus3Migration_ConferenceobjectSubjectsTest extends MigrationTestCase {
 
     protected $doc;
 

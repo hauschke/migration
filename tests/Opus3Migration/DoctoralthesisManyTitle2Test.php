@@ -31,12 +31,22 @@
  * @version     $Id$
  */
 
-class Opus3Migration_Testdump2Test extends MigrationTestCase {
+/**
+ * Description:
+ * - Dokumenttyp: Dissertation
+ * - Sprache: english
+ * - Originaltitel der Arbeit
+ * - Titel der Arbeit in Deutsch
+ * - Kurze Inhaltszusammenfassung in der Originalsprache (english)
+ * @author gunar
+ */
+
+class Opus3Migration_DoctoralthesisManyTitle2Test extends MigrationTestCase {
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
-        parent::migrate("testdump_2.xml");
+        parent::migrate("testdump_13.xml");
     }
 
     public function setUp() {
@@ -44,24 +54,31 @@ class Opus3Migration_Testdump2Test extends MigrationTestCase {
         $this->doc = new Opus_Document(1);
     }
 
-    public function testDoctypeBook() {
-        $this->assertEquals($this->doc->getType(), 'book');
+    public function testDoctypeDoctoralThesis() {
+        $this->assertEquals($this->doc->getType(), 'doctoralthesis');
     }
 
-
     public function testTitleMainEnglish() {
-        $this->assertEquals($this->doc->getTitleMain(1)->getValue(), 'Testbook');
-        $this->assertEquals($this->doc->getTitleMain(1)->getLanguage(), 'eng');
+        $this->assertEquals($this->doc->getTitleMain(0)->getValue(), 'English Titel');
+        $this->assertEquals($this->doc->getTitleMain(0)->getLanguage(), 'eng');
+    }
+    
+    public function testTitleMainGerman() {
+        $this->assertEquals($this->doc->getTitleMain(1)->getValue(), 'Deutscher Titel');
+        $this->assertEquals($this->doc->getTitleMain(1)->getLanguage(), 'deu');
     }
 
     public function testTitleAbstractEnglish() {
-        $this->assertEquals($this->doc->getTitleAbstract(1)->getValue(), 'This is a testbook.');
-        $this->assertEquals($this->doc->getTitleAbstract(1)->getLanguage(), 'eng');
+        $this->assertEquals($this->doc->getTitleAbstract(0)->getValue(), 'English Abstract');
+        $this->assertEquals($this->doc->getTitleAbstract(0)->getLanguage(), 'eng');
     }
 
-    public function testIdentifierIsbn() {
-        $this->assertEquals($this->doc->getIdentifierIsbn(0)->getValue(), '123-123-123');
-    }    
+    public function testTitleAbstractGerman() {
+        $this->assertEquals($this->doc->getTitleAbstract(1)->getValue(), 'Deutscher Asbtract');
+        $this->assertEquals($this->doc->getTitleAbstract(1)->getLanguage(), 'deu');
+    }
+
+
 
 }
-
+?>

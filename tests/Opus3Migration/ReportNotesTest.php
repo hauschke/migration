@@ -31,12 +31,12 @@
  * @version     $Id$
  */
 
-class Opus3Migration_Testdump6Test extends MigrationTestCase {
+class Opus3Migration_ReportNotesTest extends MigrationTestCase {
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
-        parent::migrate("testdump_6.xml");
+        parent::migrate("testdump_5.xml");
     }
 
     public function setUp() {
@@ -44,47 +44,18 @@ class Opus3Migration_Testdump6Test extends MigrationTestCase {
         $this->doc = new Opus_Document(1);
     }
 
-    public function testDoctypeImage() {
-        $this->assertEquals($this->doc->getType(), 'image');
+    public function testDoctypeReport() {
+        $this->assertEquals($this->doc->getType(), 'report');
     }
 
-    public function testAlphabeticalSortOrderOfSeries() {
-        // Schrfitenreihen sollen alphabetisch migriert werden
-        $series = Opus_Series::getAllSortedBySortKey();
-        $this->assertEquals($series[0]->getTitle(), 'Allererste Schriftenreihe');
-        $this->assertEquals($series[1]->getTitle(), 'Schriftenreihe 2');
-        $this->assertEquals($series[2]->getTitle(), 'Testschriftenreihe');
-        $this->assertEquals($series[3]->getTitle(), 'Zusätzliche Schriftenreihe');
+    public function testNotePrivate() {
+        $this->assertEquals($this->doc->getNote(0)->getMessage(), 'Das ist eine interne Bemerkung.');
+        $this->assertEquals($this->doc->getNote(0)->getVisibility(), 'private');
     }
 
-    public function testSeriesTitle() {
-        $series = new Opus_Series(1);
-        $this->assertEquals($series->getTitle(), 'Allererste Schriftenreihe');
-        $series = new Opus_Series(2);
-        $this->assertEquals($series->getTitle(), 'Schriftenreihe 2');
-        $series = new Opus_Series(3);
-        $this->assertEquals($series->getTitle(), 'Testschriftenreihe');
-        $series = new Opus_Series(4);
-        $this->assertEquals($series->getTitle(), 'Zusätzliche Schriftenreihe');
-
-    }
-
-    public function testSeriesVisibility() {
-        $series = new Opus_Series(1);
-        $this->assertEquals($series->getVisible(), '1');
-        $series = new Opus_Series(2);
-        $this->assertEquals($series->getVisible(), '1');
-        $series = new Opus_Series(3);
-        $this->assertEquals($series->getVisible(), '1');
-        $series = new Opus_Series(4);
-        $this->assertEquals($series->getVisible(), '1');
-    }
-
-    public function testSeriesHoldsDocumentAndNumber() {
-        //$series = new Opus_Series(1);
-        $assignedSeries = $this->doc->getSeries();
-        $this->assertEquals($assignedSeries[0]->getTitle(), 'Testschriftenreihe');
-        $this->assertEquals($assignedSeries[0]->getNumber(), '2012,01');
+    public function testNotePublic() {
+        $this->assertEquals($this->doc->getNote(1)->getMessage(), 'Das ist eine externe Bemerkung.');
+        $this->assertEquals($this->doc->getNote(1)->getVisibility(), 'public');
     }
 
 }

@@ -31,10 +31,11 @@
  * @version     $Id$
  */
 
+
 /**
- * Description of Testdump12Test:
+ * Description:
  * - Dokumenttyp: Dissertation
- * - Sprache: deutsch
+ * - Sprache: english
  * - Originaltitel der Arbeit
  * - Titel der Arbeit in Englisch
  * - Titel der Arbeit in Deutsch
@@ -43,14 +44,12 @@
  *
  * @author gunar
  */
-
-
-class Opus3Migration_TestDoctoralthesisWithManyTitle extends MigrationTestCase {
+class Opus3Migration_DoctoralthesisManyTitle3Test extends MigrationTestCase {
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
-        parent::migrate("testdump_12.xml");
+        parent::migrate("testdump_14.xml");
     }
 
     public function setUp() {
@@ -62,30 +61,29 @@ class Opus3Migration_TestDoctoralthesisWithManyTitle extends MigrationTestCase {
         $this->assertEquals($this->doc->getType(), 'doctoralthesis');
     }
 
-    public function testTitleMainGerman() {
-        $this->assertEquals($this->doc->getTitleMain(0)->getValue(), 'Testarbeit Diss');
-        $this->assertEquals($this->doc->getTitleMain(0)->getLanguage(), 'deu');
-    }
-
     public function testTitleMainEnglish() {
-        $this->assertEquals($this->doc->getTitleMain(1)->getValue(), 'Workingtitle in english');
-        $this->assertEquals($this->doc->getTitleMain(1)->getLanguage(), 'eng');
+        $this->assertEquals($this->doc->getTitleMain(0)->getValue(), 'English Title');
+        $this->assertEquals($this->doc->getTitleMain(0)->getLanguage(), 'eng');
     }
 
-    public function testTitleAbstractGerman() {
-        $this->assertEquals($this->doc->getTitleAbstract(0)->getValue(), 'Inhalt deutsch');
-        $this->assertEquals($this->doc->getTitleAbstract(0)->getLanguage(), 'deu');
+    public function testTitleMainGerman() {
+        $this->assertEquals($this->doc->getTitleMain(1)->getValue(), 'Deutscher Titel');
+        $this->assertEquals($this->doc->getTitleMain(1)->getLanguage(), 'deu');
     }
 
     public function testTitleAbstractEnglish() {
-        $this->assertEquals($this->doc->getTitleAbstract(1)->getValue(), 'Inhalt englisch');
-        $this->assertEquals($this->doc->getTitleAbstract(1)->getLanguage(), 'eng');
+        $this->assertEquals($this->doc->getTitleAbstract(0)->getValue(), 'Short Abstract');
+        $this->assertEquals($this->doc->getTitleAbstract(0)->getLanguage(), 'eng');
     }
 
-    public function testTitleAdditionalGerman() {
-        $this->assertEquals($this->doc->getTitleAdditional(0)->getValue(), 'Titel der Arbeit in Deutsch');
-        $this->assertEquals($this->doc->getTitleAdditional(0)->getLanguage(), 'deu');
+    public function testTitleAbstractGerman() {
+        $this->assertEquals($this->doc->getTitleAbstract(1)->getValue(), 'Kurze Zusammenfassung');
+        $this->assertEquals($this->doc->getTitleAbstract(1)->getLanguage(), 'deu');
     }
 
-
+    public function testTitleAdditionalEnglish() {
+        $this->assertEquals($this->doc->getTitleAdditional(0)->getValue(), 'Another english title');
+        $this->assertEquals($this->doc->getTitleAdditional(0)->getLanguage(), 'eng');
+    }
 }
+?>

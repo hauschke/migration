@@ -31,12 +31,12 @@
  * @version     $Id$
  */
 
-class Opus3Migration_Testdump10Test extends MigrationTestCase {
+class Opus3Migration_StudythesisMscTest extends MigrationTestCase {
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
-        parent::migrate("testdump_10.xml");
+        parent::migrate("testdump_8.xml");
     }
 
     public function setUp() {
@@ -44,23 +44,22 @@ class Opus3Migration_Testdump10Test extends MigrationTestCase {
         $this->doc = new Opus_Document(1);
     }
 
-    public function testDoctypePreprint() {
-        $this->assertEquals($this->doc->getType(), 'preprint');
+    public function testDoctypeStudyThesis() {
+        $this->assertEquals($this->doc->getType(), 'studythesis');
     }
 
-    public function testCollectionJel() {
-        $this->markTestIncomplete();
-        $jel_collections = Opus_Collection::fetchCollectionsByRoleNumber('5', 'P31');
-        $this->assertTrue($jel_collections[0]->holdsDocumentById($this->doc->getId()));
+    public function testCollectionMsc() {
+        $msc_collections = Opus_Collection::fetchCollectionsByRoleNumber('6', '51H10');
+        $this->assertTrue($msc_collections[0]->holdsDocumentById($this->doc->getId()));
 
-        $jel_collections = Opus_Collection::fetchCollectionsByRoleNumber('5', 'H20');
-        $this->assertTrue($jel_collections[0]->holdsDocumentById($this->doc->getId()));
+        $msc_collections = Opus_Collection::fetchCollectionsByRoleNumber('6', '90B06');
+        $this->assertTrue($msc_collections[0]->holdsDocumentById($this->doc->getId()));
 
-        $jel_collections = Opus_Collection::fetchCollectionsByRoleNumber('5', 'I2');
-        $this->assertTrue($jel_collections[0]->holdsDocumentById($this->doc->getId()));
+        $msc_collections = Opus_Collection::fetchCollectionsByRoleNumber('6', '90B90');
+        $this->assertTrue($msc_collections[0]->holdsDocumentById($this->doc->getId()));
 
-        $jel_collections = Opus_Collection::fetchCollectionsByRoleNumber('5', 'F21');
-        $this->assertTrue($jel_collections[0]->holdsDocumentById($this->doc->getId()));
+        $msc_collections = Opus_Collection::fetchCollectionsByRoleNumber('6', '05D99');
+        $this->assertTrue($msc_collections[0]->holdsDocumentById($this->doc->getId()));
     }
 
 }
