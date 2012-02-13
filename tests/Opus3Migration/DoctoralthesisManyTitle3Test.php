@@ -49,6 +49,7 @@ class Opus3Migration_DoctoralthesisManyTitle3Test extends MigrationTestCase {
     protected $doc;
 
     public static function setUpBeforeClass()  {
+        parent::setUpBeforeClass();
         parent::migrate("testdump_14.xml");
     }
 

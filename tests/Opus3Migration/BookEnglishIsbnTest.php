@@ -36,6 +36,7 @@ class Opus3Migration_BookEnglishIsbnTest extends MigrationTestCase {
     protected $doc;
 
     public static function setUpBeforeClass()  {
+        parent::setUpBeforeClass();
         parent::migrate("testdump_2.xml");
     }
 

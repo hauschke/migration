@@ -37,14 +37,23 @@
  *
  * @category Tests
  */
+
 class MigrationTestCase extends PHPUnit_Framework_TestCase {
 
-    protected static function migrate($dumpfile) {
+    protected static $script;
+    protected static $dump_dir;
+    protected static $fulltext_dir;
 
-        $script = dirname(dirname(dirname(__FILE__))) . '/server/scripts/migration/opus3-migration.sh';
-        $dump_dir = dirname(__FILE__) . '/dumps/';
-        $fulltext_dir = dirname(__FILE__) . "/fulltexts/";
 
-        exec($script . " -f " . $dump_dir . $dumpfile . " -p " . $fulltext_dir);
+    public static function setUpBeforeClass() {
+        // self::$script = dirname(dirname(__FILE__)) . '/migration/opus3-migration.sh';
+       self::$script = dirname(dirname(dirname(__FILE__))) . '/server/scripts/migration/opus3-migration.sh';
+       self::$dump_dir = dirname(__FILE__) . '/dumps/';
+       self::$fulltext_dir = dirname(__FILE__) . "/fulltexts/";
     }
+
+    protected static function migrate($dumpfile) {
+        exec(self::$script  . " -f " . self::$dump_dir . $dumpfile . " -p " . self::$fulltext_dir);
+    }
+
 }
