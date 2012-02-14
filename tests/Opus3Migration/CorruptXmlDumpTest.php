@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of OPUS. The software OPUS has been originally developed
  * at the University of Stuttgart with funding from the German Research Net,
@@ -25,36 +24,28 @@
  * along with OPUS; if not, write to the Free Software Foundation, Inc., 51
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  *
- * @category    Tests
+ * @category    TODO
  * @author      Gunar Maiwald <maiwald@zib.de>
  * @copyright   Copyright (c) 2008-2012, OPUS 4 development team
  * @license     http://www.gnu.org/licenses/gpl.html General Public License
  * @version     $Id$
  */
 
-/**
- * Superclass for all migrationtestss.
- *
- * @category Tests
- */
+class Opus3Migration_CorruptXmlDumpTest extends MigrationTestCase {
 
-class MigrationTestCase extends PHPUnit_Framework_TestCase {
+    protected $doc;
 
-    protected static $script;
-    protected static $dump_dir;
-    protected static $fulltext_dir;
-
-
-    public static function setUpBeforeClass() {
-        // self::$script = dirname(dirname(__FILE__)) . '/migration/opus3-migration.sh';
-       self::$script = dirname(dirname(dirname(__FILE__))) . '/server/scripts/migration/opus3-migration.sh';
-       self::$dump_dir = dirname(__FILE__) . '/dumps/';
-       self::$fulltext_dir = dirname(__FILE__) . "/fulltexts/";
+    public static function setUpBeforeClass()  {
+        parent::setUpBeforeClass();
     }
 
-    protected static function migrate($dumpfile) {
-       $output = exec(self::$script  . " -f " . self::$dump_dir . $dumpfile . " -p " . self::$fulltext_dir);
-       return $output;
+    public function setUp() {
+        parent::setUp();
     }
 
+    public function testCorruptXmlDump() {
+        $out = parent::migrate("testdump_16.xml");
+        $this->assertContains('XML-Dump-File is not well-formed', $out);
+    }
 }
+?>
