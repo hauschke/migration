@@ -37,6 +37,7 @@ class Opus3Migration_CorruptXmlDumpTest extends MigrationTestCase {
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
+        parent::migrate("Corrupt.xml");
     }
 
     public function setUp() {
@@ -44,8 +45,12 @@ class Opus3Migration_CorruptXmlDumpTest extends MigrationTestCase {
     }
 
     public function testCorruptXmlDump() {
-        $out = parent::migrate("testdump_16.xml");
-        $this->assertContains('XML-Dump-File is not well-formed', $out);
+        $this->assertContains('XML-Dump-File is not well-formed', parent::$output);
+    }
+
+    public function testNumberOfDocuments() {
+        $odf = new Opus_DocumentFinder();
+        $this->assertEquals($odf->count(), '0');
     }
 }
-?>
+

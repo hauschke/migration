@@ -37,7 +37,7 @@ class Opus3Migration_PreprintJelTest extends MigrationTestCase {
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("testdump_10.xml");
+        parent::migrate("PreprintJel.xml");
     }
 
     public function setUp() {

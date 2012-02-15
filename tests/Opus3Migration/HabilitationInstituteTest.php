@@ -37,7 +37,7 @@ class Opus3Migration_HabilitationInstituteTest extends MigrationTestCase {
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("testdump_7.xml");
+        parent::migrate("HabilitationInstitute.xml");
     }
 
     public function setUp() {

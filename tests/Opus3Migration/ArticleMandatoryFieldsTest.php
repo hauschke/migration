@@ -37,7 +37,7 @@ class Opus3Migration_ArticleMandatoryFieldsTest extends MigrationTestCase {
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("testdump_1.xml");
+        parent::migrate("ArticleMandatoryFields.xml");
     }
     
     public function setUp() {

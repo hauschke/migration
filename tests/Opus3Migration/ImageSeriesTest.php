@@ -37,7 +37,7 @@ class Opus3Migration_ImageSeriesTest extends MigrationTestCase {
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("testdump_6.xml");
+        parent::migrate("ImageSeries.xml");
     }
 
     public function setUp() {

@@ -41,7 +41,7 @@ class Opus3Migration_SoundRussianWithFilenamesTest extends MigrationTestCase {
         $file = iconv("UTF-8", "ISO-8859-1", $filename);
         $handle = fopen($file, 'w') or die("can't open file");
         fclose($handle);
-        parent::migrate("testdump_15.xml");
+        parent::migrate("SoundRussianWithFilenames.xml");
         unlink($file);
     }
 

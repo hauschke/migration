@@ -37,7 +37,7 @@ class Opus3Migration_StudythesisMscTest extends MigrationTestCase {
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("testdump_8.xml");
+        parent::migrate("StudythesisMsc.xml");
     }
 
     public function setUp() {

@@ -37,7 +37,7 @@ class Opus3Migration_ReportNotesTest extends MigrationTestCase {
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("testdump_5.xml");
+        parent::migrate("ReportNotes.xml");
     }
 
     public function setUp() {

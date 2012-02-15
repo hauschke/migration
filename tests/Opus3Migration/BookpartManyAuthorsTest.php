@@ -37,7 +37,7 @@ class Opus3Migration_BookpartManyAuthorsTest extends MigrationTestCase {
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("testdump_3.xml");
+        parent::migrate("BookpartManyAuthors.xml");
     }
 
     public function setUp() {

@@ -51,7 +51,7 @@ class Opus3Migration_DoctoralthesisManyTitleTest extends MigrationTestCase {
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("testdump_12.xml");
+        parent::migrate("DoctoralthesisManyTitle.xml");
     }
 
     public function setUp() {

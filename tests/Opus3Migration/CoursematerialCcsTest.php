@@ -37,7 +37,7 @@ class Opus3Migration_CoursematerialCcsTest extends MigrationTestCase {
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("testdump_11.xml");
+        parent::migrate("CoursematerialCcs.xml");
     }
 
     public function setUp() {

@@ -37,7 +37,7 @@ class Opus3Migration_MasterthesisFrenchPacsTest extends MigrationTestCase {
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("testdump_9.xml");
+        parent::migrate("MasterthesisFrenchPacs.xml");
     }
 
     public function setUp() {

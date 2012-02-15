@@ -37,7 +37,7 @@ class Opus3Migration_ConferenceobjectSubjectsTest extends MigrationTestCase {
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("testdump_4.xml");
+        parent::migrate("ConferenceobjectSubjects.xml");
     }
 
     public function setUp() {
