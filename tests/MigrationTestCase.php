@@ -44,6 +44,7 @@ class MigrationTestCase extends PHPUnit_Framework_TestCase {
     protected static $dump_dir;
     protected static $fulltext_dir;
     protected static $output;
+    protected static $stepsize;
 
 
     public static function setUpBeforeClass() {
@@ -51,10 +52,11 @@ class MigrationTestCase extends PHPUnit_Framework_TestCase {
        self::$script = dirname(dirname(dirname(__FILE__))) . '/server/scripts/migration/opus3-migration.sh';
        self::$dump_dir = dirname(__FILE__) . '/dumps/';
        self::$fulltext_dir = dirname(__FILE__) . "/fulltexts/";
+       self::$stepsize = 10;
     }
 
     protected static function migrate($dumpfile) {
-       self::$output = exec(self::$script  . " -f " . self::$dump_dir . $dumpfile . " -p " . self::$fulltext_dir);
+       self::$output = exec(self::$script  . " -f " . self::$dump_dir . $dumpfile . " -p " . self::$fulltext_dir . " -z " . self::$stepsize);
     }
 
 }
