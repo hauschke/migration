@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of OPUS. The software OPUS has been originally developed
  * at the University of Stuttgart with funding from the German Research Net,
@@ -25,36 +24,39 @@
  * along with OPUS; if not, write to the Free Software Foundation, Inc., 51
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  *
- * @category    Tests
+ * @category    TODO
  * @author      Gunar Maiwald <maiwald@zib.de>
  * @copyright   Copyright (c) 2008-2012, OPUS 4 development team
  * @license     http://www.gnu.org/licenses/gpl.html General Public License
  * @version     $Id$
  */
 
-/**
- * Superclass for all migrationtestss.
- *
- * @category Tests
- */
-
-class MigrationTestCase extends PHPUnit_Framework_TestCase {
-
-    protected static $script;
-    protected static $dump_dir;
-    protected static $fulltext_dir;
-    protected static $output;
-
-
-    public static function setUpBeforeClass() {
-        // self::$script = dirname(dirname(__FILE__)) . '/migration/opus3-migration.sh';
-       self::$script = dirname(dirname(dirname(__FILE__))) . '/server/scripts/migration/opus3-migration.sh';
-       self::$dump_dir = dirname(__FILE__) . '/dumps/';
-       self::$fulltext_dir = dirname(__FILE__) . "/fulltexts/";
+class Opus3Migration_PermissionDumpAndDirectoryTest extends MigrationTestCase {
+    public static function setUpBeforeClass()  {
+        parent::setUpBeforeClass();
     }
 
-    protected static function migrate($dumpfile) {
-       self::$output = exec(self::$script  . " -f " . self::$dump_dir . $dumpfile . " -p " . self::$fulltext_dir);
+    public function setUp() {
+        parent::setUp();
     }
 
+    public function testNotExistingXmlDump() {
+        parent::migrate("testdump_not_exists.xml");
+        $this->assertContains("/testdump_not_exists.xml' does not exist or is not readable", parent::$output);
+    }
+
+    public function testNotExistingFulltextDir() {
+        parent::$fulltext_dir = parent::$fulltext_dir . "directory_not_exists";
+        parent::migrate("ArticleMandatoryFields.xml");
+        $this->assertContains("/directory_not_exists' does not exist or is not readable", parent::$output);
+    }
+
+    public function testNotReadableXmlDump() {
+        $this->markTestIncomplete();
+    }
+
+    public function testNotReadableFulltextDir() {
+        $this->markTestIncomplete();
+    }
 }
+?>
