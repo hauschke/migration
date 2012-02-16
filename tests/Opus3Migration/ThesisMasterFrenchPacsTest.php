@@ -31,13 +31,13 @@
  * @version     $Id$
  */
 
-class Opus3Migration_BookpartManyAuthorsTest extends MigrationTestCase {
+class Opus3Migration_ThesisMasterFrenchPacsTest extends MigrationTestCase {
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("BookpartManyAuthors.xml");
+        parent::migrate("ThesisMasterFrenchPacs.xml");
     }
 
     public function setUp() {
@@ -45,25 +45,32 @@ class Opus3Migration_BookpartManyAuthorsTest extends MigrationTestCase {
         $this->doc = new Opus_Document(1);
     }
 
-    public function testDoctypeBookpart() {
-        $this->assertEquals($this->doc->getType(), 'bookpart');
+    public function testDoctypeMasterThesis() {
+        $this->assertEquals($this->doc->getType(), 'masterthesis');
     }
 
-    public function testMultipleAuthors() {
-        $this->assertEquals($this->doc->getPersonAuthor(0)->getFirstName(), 'John');
-        $this->assertEquals($this->doc->getPersonAuthor(0)->getLastName(), 'Doe');
-        $this->assertEquals($this->doc->getPersonAuthor(0)->getSortOrder(), '1');
-        $this->assertEquals($this->doc->getPersonAuthor(1)->getFirstName(), 'Jane');
-        $this->assertEquals($this->doc->getPersonAuthor(1)->getLastName(), 'Doe');
-        $this->assertEquals($this->doc->getPersonAuthor(1)->getSortOrder(), '2');
-        $this->assertEquals($this->doc->getPersonAuthor(2)->getFirstName(), 'Max');
-        $this->assertEquals($this->doc->getPersonAuthor(2)->getLastName(), 'Mustermann');
-        $this->assertEquals($this->doc->getPersonAuthor(2)->getSortOrder(), '3');
+    public function testTitleMainFrench() {
+        $this->assertEquals($this->doc->getTitleMain(0)->getValue(), 'Entendez-vous dans les montagnes');
+        $this->assertEquals($this->doc->getTitleMain(0)->getLanguage(), 'fra');
     }
 
-    public function testEnrichmentSourceTitle() {
-        $this->assertEquals($this->doc->getEnrichment(0)->getKeyName(), 'SourceTitle');
-        $this->assertEquals($this->doc->getEnrichment(0)->getValue(), 'Buch des Testkapitels');
+    public function testTitleAbstractFrench() {
+        $this->assertEquals($this->doc->getTitleAbstract(0)->getValue(), 'Examen de la montagne');
+        $this->assertEquals($this->doc->getTitleAbstract(0)->getLanguage(), 'fra');
+    }
+
+    public function testCollectionPacs() {
+        $pacs_collections = Opus_Collection::fetchCollectionsByRoleNumber('4', '82.56.-b');
+        $this->assertTrue($pacs_collections[0]->holdsDocumentById($this->doc->getId()));
+
+        $pacs_collections = Opus_Collection::fetchCollectionsByRoleNumber('4', '84.60.-h');
+        $this->assertTrue($pacs_collections[0]->holdsDocumentById($this->doc->getId()));
+
+        $pacs_collections = Opus_Collection::fetchCollectionsByRoleNumber('4', '78.20.-e');
+        $this->assertTrue($pacs_collections[0]->holdsDocumentById($this->doc->getId()));
+
+        $pacs_collections = Opus_Collection::fetchCollectionsByRoleNumber('4', '42.70.-a');
+        $this->assertTrue($pacs_collections[0]->holdsDocumentById($this->doc->getId()));
     }
 
 }

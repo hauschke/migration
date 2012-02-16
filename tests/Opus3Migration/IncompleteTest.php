@@ -31,37 +31,44 @@
  * @version     $Id$
  */
 
-class Opus3Migration_StudythesisMscTest extends MigrationTestCase {
+class IncompleteTest extends MigrationTestCase {
 
-    protected $doc;
 
-    public static function setUpBeforeClass()  {
-        parent::setUpBeforeClass();
-        parent::migrate("StudythesisMsc.xml");
+
+    public function testContributor() {
+        // TODO: OPUSVIER-1988
+        $this->markTestIncomplete();
     }
 
-    public function setUp() {
-        parent::setUp();
-        $this->doc = new Opus_Document(1);
+    public function testStoreBemExternAsEnrichment() {
+        // Schrfitenreihen sollen alphabetisch migriert werden
+        $this->markTestIncomplete();
     }
 
-    public function testDoctypeStudyThesis() {
-        $this->assertEquals($this->doc->getType(), 'studythesis');
+    public function testCollectionStructure() {
+        // Collections mÃ¼ssen ggf. strukturiert migriert werden
+        $this->markTestIncomplete();
     }
 
-    public function testCollectionMsc() {
-        $msc_collections = Opus_Collection::fetchCollectionsByRoleNumber('6', '51H10');
-        $this->assertTrue($msc_collections[0]->holdsDocumentById($this->doc->getId()));
 
-        $msc_collections = Opus_Collection::fetchCollectionsByRoleNumber('6', '90B06');
-        $this->assertTrue($msc_collections[0]->holdsDocumentById($this->doc->getId()));
-
-        $msc_collections = Opus_Collection::fetchCollectionsByRoleNumber('6', '90B90');
-        $this->assertTrue($msc_collections[0]->holdsDocumentById($this->doc->getId()));
-
-        $msc_collections = Opus_Collection::fetchCollectionsByRoleNumber('6', '05D99');
-        $this->assertTrue($msc_collections[0]->holdsDocumentById($this->doc->getId()));
+    public function testDocumentHoldsLicense() {
+        // Zuordnung von Lizenzen zu Dokumenetn
+        // TODO fÃ¼r alle Opus3-Lizenzen(?)
+        $this->markTestIncomplete();
     }
+
+    public function testFileImporter() {
+        // prÃ¼fe, welche Files Ã¼betragen werden (Struktur!!)
+        // Regtressionstests
+        $this->markTestIncomplete();
+    }
+
+    public function testRoleImporter() {
+        // TODO: OPUSVIER-1988
+        $this->markTestIncomplete();
+    }
+
 
 }
+
 

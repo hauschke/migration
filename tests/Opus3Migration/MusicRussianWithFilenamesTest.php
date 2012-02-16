@@ -31,7 +31,7 @@
  * @version     $Id $
  */
 
-class Opus3Migration_SoundRussianWithFilenamesTest extends MigrationTestCase {
+class Opus3Migration_MusicRussianWithFilenamesTest extends MigrationTestCase {
 
     protected $doc;
 
@@ -41,7 +41,7 @@ class Opus3Migration_SoundRussianWithFilenamesTest extends MigrationTestCase {
         $file = iconv("UTF-8", "ISO-8859-1", $filename);
         $handle = fopen($file, 'w') or die("can't open file");
         fclose($handle);
-        parent::migrate("SoundRussianWithFilenames.xml");
+        parent::migrate("MusicRussianWithFilenames.xml");
         unlink($file);
     }
 

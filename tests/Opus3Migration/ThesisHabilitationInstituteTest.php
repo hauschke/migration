@@ -31,13 +31,13 @@
  * @version     $Id$
  */
 
-class Opus3Migration_HabilitationInstituteTest extends MigrationTestCase {
+class Opus3Migration_ThesisHabilitationInstituteTest extends MigrationTestCase {
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("HabilitationInstitute.xml");
+        parent::migrate("ThesisHabilitationInstitute.xml");
     }
 
     public function setUp() {

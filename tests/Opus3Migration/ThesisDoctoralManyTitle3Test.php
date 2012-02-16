@@ -31,13 +31,26 @@
  * @version     $Id$
  */
 
-class Opus3Migration_MasterthesisFrenchPacsTest extends MigrationTestCase {
+
+/**
+ * Description:
+ * - Dokumenttyp: Dissertation
+ * - Sprache: english
+ * - Originaltitel der Arbeit
+ * - Titel der Arbeit in Englisch
+ * - Titel der Arbeit in Deutsch
+ * - Kurze Inhaltszusammenfassung in der Originalsprache (deutsch)
+ * - Kurze Inhaltszusammenfassung in einer weiteren Sprache (english)
+ *
+ * @author gunar
+ */
+class Opus3Migration_ThesisDoctoralManyTitle3Test extends MigrationTestCase {
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("MasterthesisFrenchPacs.xml");
+        parent::migrate("ThesisDoctoralManyTitle3.xml");
     }
 
     public function setUp() {
@@ -45,33 +58,33 @@ class Opus3Migration_MasterthesisFrenchPacsTest extends MigrationTestCase {
         $this->doc = new Opus_Document(1);
     }
 
-    public function testDoctypeMasterThesis() {
-        $this->assertEquals($this->doc->getType(), 'masterthesis');
+    public function testDoctypeDoctoralThesis() {
+        $this->assertEquals($this->doc->getType(), 'doctoralthesis');
     }
 
-    public function testTitleMainFrench() {
-        $this->assertEquals($this->doc->getTitleMain(0)->getValue(), 'Entendez-vous dans les montagnes');
-        $this->assertEquals($this->doc->getTitleMain(0)->getLanguage(), 'fra');
+    public function testTitleMainEnglish() {
+        $this->assertEquals($this->doc->getTitleMain(0)->getValue(), 'English Title');
+        $this->assertEquals($this->doc->getTitleMain(0)->getLanguage(), 'eng');
     }
 
-    public function testTitleAbstractFrench() {
-        $this->assertEquals($this->doc->getTitleAbstract(0)->getValue(), 'Examen de la montagne');
-        $this->assertEquals($this->doc->getTitleAbstract(0)->getLanguage(), 'fra');
+    public function testTitleMainGerman() {
+        $this->assertEquals($this->doc->getTitleMain(1)->getValue(), 'Deutscher Titel');
+        $this->assertEquals($this->doc->getTitleMain(1)->getLanguage(), 'deu');
     }
 
-    public function testCollectionPacs() {
-        $pacs_collections = Opus_Collection::fetchCollectionsByRoleNumber('4', '82.56.-b');
-        $this->assertTrue($pacs_collections[0]->holdsDocumentById($this->doc->getId()));
-
-        $pacs_collections = Opus_Collection::fetchCollectionsByRoleNumber('4', '84.60.-h');
-        $this->assertTrue($pacs_collections[0]->holdsDocumentById($this->doc->getId()));
-
-        $pacs_collections = Opus_Collection::fetchCollectionsByRoleNumber('4', '78.20.-e');
-        $this->assertTrue($pacs_collections[0]->holdsDocumentById($this->doc->getId()));
-
-        $pacs_collections = Opus_Collection::fetchCollectionsByRoleNumber('4', '42.70.-a');
-        $this->assertTrue($pacs_collections[0]->holdsDocumentById($this->doc->getId()));
+    public function testTitleAbstractEnglish() {
+        $this->assertEquals($this->doc->getTitleAbstract(0)->getValue(), 'Short Abstract');
+        $this->assertEquals($this->doc->getTitleAbstract(0)->getLanguage(), 'eng');
     }
 
+    public function testTitleAbstractGerman() {
+        $this->assertEquals($this->doc->getTitleAbstract(1)->getValue(), 'Kurze Zusammenfassung');
+        $this->assertEquals($this->doc->getTitleAbstract(1)->getLanguage(), 'deu');
+    }
+
+    public function testTitleAdditionalEnglish() {
+        $this->assertEquals($this->doc->getTitleAdditional(0)->getValue(), 'Another english title');
+        $this->assertEquals($this->doc->getTitleAdditional(0)->getLanguage(), 'eng');
+    }
 }
-
+?>

@@ -31,13 +31,13 @@
  * @version     $Id$
  */
 
-class Opus3Migration_ReportNotesTest extends MigrationTestCase {
+class Opus3Migration_TechReportNotesTest extends MigrationTestCase {
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("ReportNotes.xml");
+        parent::migrate("TechReportNotes.xml");
     }
 
     public function setUp() {

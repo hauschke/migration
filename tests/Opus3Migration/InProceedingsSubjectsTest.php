@@ -31,13 +31,13 @@
  * @version     $Id$
  */
 
-class Opus3Migration_ConferenceobjectSubjectsTest extends MigrationTestCase {
+class Opus3Migration_InProceedingsSubjectsTest extends MigrationTestCase {
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("ConferenceobjectSubjects.xml");
+        parent::migrate("InProceedingsSubjects.xml");
     }
 
     public function setUp() {

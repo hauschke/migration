@@ -41,13 +41,13 @@
  * @author gunar
  */
 
-class Opus3Migration_DoctoralthesisManyTitle2Test extends MigrationTestCase {
+class Opus3Migration_ThesisDoctoralManyTitle2Test extends MigrationTestCase {
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("DoctoralthesisManyTitle2.xml");
+        parent::migrate("ThesisDoctoralManyTitle2.xml");
     }
 
     public function setUp() {

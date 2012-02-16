@@ -31,26 +31,13 @@
  * @version     $Id$
  */
 
-
-/**
- * Description:
- * - Dokumenttyp: Dissertation
- * - Sprache: english
- * - Originaltitel der Arbeit
- * - Titel der Arbeit in Englisch
- * - Titel der Arbeit in Deutsch
- * - Kurze Inhaltszusammenfassung in der Originalsprache (deutsch)
- * - Kurze Inhaltszusammenfassung in einer weiteren Sprache (english)
- *
- * @author gunar
- */
-class Opus3Migration_DoctoralthesisManyTitle3Test extends MigrationTestCase {
+class Opus3Migration_InBookManyAuthorsTest extends MigrationTestCase {
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("DoctoralthesisManyTitle3.xml");
+        parent::migrate("InBookManyAuthors.xml");
     }
 
     public function setUp() {
@@ -58,33 +45,26 @@ class Opus3Migration_DoctoralthesisManyTitle3Test extends MigrationTestCase {
         $this->doc = new Opus_Document(1);
     }
 
-    public function testDoctypeDoctoralThesis() {
-        $this->assertEquals($this->doc->getType(), 'doctoralthesis');
+    public function testDoctypeBookpart() {
+        $this->assertEquals($this->doc->getType(), 'bookpart');
     }
 
-    public function testTitleMainEnglish() {
-        $this->assertEquals($this->doc->getTitleMain(0)->getValue(), 'English Title');
-        $this->assertEquals($this->doc->getTitleMain(0)->getLanguage(), 'eng');
+    public function testMultipleAuthors() {
+        $this->assertEquals($this->doc->getPersonAuthor(0)->getFirstName(), 'John');
+        $this->assertEquals($this->doc->getPersonAuthor(0)->getLastName(), 'Doe');
+        $this->assertEquals($this->doc->getPersonAuthor(0)->getSortOrder(), '1');
+        $this->assertEquals($this->doc->getPersonAuthor(1)->getFirstName(), 'Jane');
+        $this->assertEquals($this->doc->getPersonAuthor(1)->getLastName(), 'Doe');
+        $this->assertEquals($this->doc->getPersonAuthor(1)->getSortOrder(), '2');
+        $this->assertEquals($this->doc->getPersonAuthor(2)->getFirstName(), 'Max');
+        $this->assertEquals($this->doc->getPersonAuthor(2)->getLastName(), 'Mustermann');
+        $this->assertEquals($this->doc->getPersonAuthor(2)->getSortOrder(), '3');
     }
 
-    public function testTitleMainGerman() {
-        $this->assertEquals($this->doc->getTitleMain(1)->getValue(), 'Deutscher Titel');
-        $this->assertEquals($this->doc->getTitleMain(1)->getLanguage(), 'deu');
+    public function testEnrichmentSourceTitle() {
+        $this->assertEquals($this->doc->getEnrichment(0)->getKeyName(), 'SourceTitle');
+        $this->assertEquals($this->doc->getEnrichment(0)->getValue(), 'Buch des Testkapitels');
     }
 
-    public function testTitleAbstractEnglish() {
-        $this->assertEquals($this->doc->getTitleAbstract(0)->getValue(), 'Short Abstract');
-        $this->assertEquals($this->doc->getTitleAbstract(0)->getLanguage(), 'eng');
-    }
-
-    public function testTitleAbstractGerman() {
-        $this->assertEquals($this->doc->getTitleAbstract(1)->getValue(), 'Kurze Zusammenfassung');
-        $this->assertEquals($this->doc->getTitleAbstract(1)->getLanguage(), 'deu');
-    }
-
-    public function testTitleAdditionalEnglish() {
-        $this->assertEquals($this->doc->getTitleAdditional(0)->getValue(), 'Another english title');
-        $this->assertEquals($this->doc->getTitleAdditional(0)->getLanguage(), 'eng');
-    }
 }
-?>
+
