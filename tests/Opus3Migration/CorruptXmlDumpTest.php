@@ -45,7 +45,7 @@ class Opus3Migration_CorruptXmlDumpTest extends MigrationTestCase {
     }
 
     public function testCorruptXmlDump() {
-        $this->assertContains('XML-Dump-File is not well-formed', parent::$output);
+        $this->assertOutputContainsString("XML-Dump-File is not well-formed");
     }
 
     public function testNumberOfDocuments() {

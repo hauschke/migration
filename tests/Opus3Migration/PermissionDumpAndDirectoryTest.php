@@ -42,13 +42,13 @@ class Opus3Migration_PermissionDumpAndDirectoryTest extends MigrationTestCase {
 
     public function testNotExistingXmlDump() {
         parent::migrate("testdump_not_exists.xml");
-        $this->assertContains("/testdump_not_exists.xml' does not exist or is not readable", parent::$output);
+        $this->assertOutputContainsString("/testdump_not_exists.xml' does not exist or is not readable");
     }
 
     public function testNotExistingFulltextDir() {
         parent::$fulltext_dir = parent::$fulltext_dir . "directory_not_exists";
         parent::migrate("ArticleMandatoryFields.xml");
-        $this->assertContains("/directory_not_exists' does not exist or is not readable", parent::$output);
+        $this->assertOutputContainsString("/directory_not_exists' does not exist or is not readable");
     }
 
     public function testNotReadableXmlDump() {
@@ -59,4 +59,4 @@ class Opus3Migration_PermissionDumpAndDirectoryTest extends MigrationTestCase {
         $this->markTestIncomplete();
     }
 }
-?>
+

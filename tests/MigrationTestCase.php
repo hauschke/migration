@@ -43,7 +43,7 @@ class MigrationTestCase extends PHPUnit_Framework_TestCase {
     protected static $script;
     protected static $dump_dir;
     protected static $fulltext_dir;
-    protected static $output;
+    protected static $output = array();
     protected static $stepsize;
 
 
@@ -56,7 +56,15 @@ class MigrationTestCase extends PHPUnit_Framework_TestCase {
     }
 
     protected static function migrate($dumpfile) {
-       self::$output = exec(self::$script  . " -f " . self::$dump_dir . $dumpfile . " -p " . self::$fulltext_dir . " -z " . self::$stepsize);
+       exec(self::$script  . " -f " . self::$dump_dir . $dumpfile . " -p " . self::$fulltext_dir . " -z " . self::$stepsize, self::$output);
+    }
+
+    protected function assertOutputContainsString($string) {
+       $outputContainsString = false;
+       foreach (self::$output as $line) {
+           if (strpos($line, $string)) { $outputContainsString = true; }
+       }
+       $this->assertTrue($outputContainsString);
     }
 
 }
