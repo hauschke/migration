@@ -86,6 +86,10 @@ class Opus3Migration_ArticleMandatoryFieldsTest extends MigrationTestCase {
         $this->assertStringStartsWith(date("Y-m-d",time()), $this->doc->getServerDateModified()->__toString());
     }
 
+    public function testServerState() {
+        $this->assertEquals($this->doc->getServerState(), 'published');
+    }
+
     public function testIdentifierOpus3() {
         $this->assertEquals($this->doc->getIdentifierOpus3(0)->getValue(), '3');
     }
