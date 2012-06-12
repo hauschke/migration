@@ -31,67 +31,38 @@
  * @version     $Id $
  */
 
-class Opus3Migration_MusicRussianWithFilenamesTest extends MigrationTestCase {
+class Opus3Migration_ConferenceIpProtectedTest extends MigrationTestCase {
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        $filename = parent::$fulltext_dir . "2012/19/pdf/Präsentation.pdf";
-        $file = iconv("UTF-8", "ISO-8859-1", $filename);
-        $handle = fopen($file, 'w') or die("can't open file");
-        fclose($handle);
-        parent::migrate("MusicRussianWithFilenames.xml");
-        unlink($file);
+        parent::migrate("ConferenceIpProtected.xml");
     }
+
 
     public function setUp() {
         parent::setUp();
         $this->doc = new Opus_Document(1);
     }
 
-    public function testDoctypeBook() {
-        $this->assertEquals($this->doc->getType(), 'sound');
-    }
-
-    public function testTitleMainRussian() {
-        $this->assertEquals($this->doc->getTitleMain(0)->getValue(), 'Russkaja Musika');
-        $this->assertEquals($this->doc->getTitleMain(0)->getLanguage(), 'rus');
-    }
-
-    public function testTitleAbstractRussian() {
-        $this->assertEquals($this->doc->getTitleAbstract(0)->getValue(), 'Eta russkaja musika!');
-        $this->assertEquals($this->doc->getTitleAbstract(0)->getLanguage(), 'rus');
+    public function testDoctypeConferenceObject() {
+        $this->assertEquals($this->doc->getType(), 'conferenceobject');
     }
 
     public function testFileCount() {
-        $this->assertEquals(count($this->doc->getFile()), '3');
+        $this->assertEquals(count($this->doc->getFile()), '1');
     }
 
-    public function testFilenameWithWhitespace() {
-        $this->assertEquals($this->doc->getFile(0)->getPathName(), 'Praesentation Whitespace.pdf');
+    public function testFilename() {
+        $this->assertEquals($this->doc->getFile(0)->getPathName(), 'IP_geschuetzte_Praesentation.pdf');
         $this->assertEquals($this->doc->getFile(0)->getLabel(), 'Dokument_1.pdf');
-    }
-  
-    public function testFilenameWithSpecialCharacter() {
-        $this->assertEquals($this->doc->getFile(1)->getPathName(), 'Präsentation.pdf');
-        $this->assertEquals($this->doc->getFile(1)->getLabel(), 'Dokument_2.pdf');
-    }
-
-    public function testFilenameWithCorruptCharacter() {
-        $this->assertEquals($this->doc->getFile(2)->getPathName(), 'Prsentation.pdf');
-        $this->assertEquals($this->doc->getFile(2)->getLabel(), 'Dokument_3.pdf');
     }
 
     public function testVisibility() {
+        $this->assertEquals($this->doc->getFile(0)->getVisibleInOai(), '0');
         $this->assertEquals($this->doc->getFile(0)->getVisibleInFrontdoor(), '1');
-        $this->assertEquals($this->doc->getFile(0)->getVisibleInOai(), '1');
-        $this->assertEquals($this->doc->getFile(1)->getVisibleInFrontdoor(), '1');
-        $this->assertEquals($this->doc->getFile(1)->getVisibleInOai(), '1');
-        $this->assertEquals($this->doc->getFile(2)->getVisibleInFrontdoor(), '1');
-        $this->assertEquals($this->doc->getFile(2)->getVisibleInOai(), '1');
     }
-
 
 }
 
