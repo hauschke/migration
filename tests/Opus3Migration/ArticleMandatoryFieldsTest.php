@@ -63,6 +63,14 @@ class Opus3Migration_ArticleMandatoryFieldsTest extends MigrationTestCase {
         $this->assertEquals($this->doc->getPersonAuthor(0)->getFirstName(), 'John');
         $this->assertEquals($this->doc->getPersonAuthor(0)->getLastName(), 'Doe');
         $this->assertEquals($this->doc->getPersonAuthor(0)->getSortOrder(), '1');
+        $this->assertNull($this->doc->getPersonAuthor(0)->getEmail());
+    }
+
+    public function testPersonSubmitter() {
+        $this->assertEquals(count($this->doc->getPersonSubmitter()), '1');
+        $this->assertEquals($this->doc->getPersonSubmitter(0)->getLastName(), 'unknown');
+        $this->assertNull($this->doc->getPersonSubmitter(0)->getFirstName());
+        $this->assertEquals($this->doc->getPersonSubmitter(0)->getSortOrder(), '1');
         $this->assertEquals($this->doc->getPersonSubmitter(0)->getEmail(), 'foo@test.de');
     }
 
