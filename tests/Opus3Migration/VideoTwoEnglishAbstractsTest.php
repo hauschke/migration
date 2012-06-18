@@ -48,7 +48,7 @@ class Opus3Migration_VideoTwoEnglishAbstractsTest extends MigrationTestCase {
 
     public function testDuplicateAbstractWarning() {
         $this->assertOutputContainsString("This document has two 'TitleAbstract' with equal language. Document will not be indexed");
-     }
+    }
 
     public function testDoctypeMovingimage() {
         $this->assertEquals($this->doc->getType(), 'movingimage');
