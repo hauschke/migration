@@ -88,5 +88,9 @@ class Opus3Migration_ThesisDoctoralManyTitleTest extends MigrationTestCase {
         $this->assertEquals($this->doc->getTitleAdditional(0)->getLanguage(), 'deu');
     }
 
+    public function testTitleAdditionalWarning() {
+        $this->assertOutputContainsString("'title_en' or 'title_de' mapped to 'TitleAdditional' to prevent 'TitleMain' with duplicate language");
+    }
+
 
 }
