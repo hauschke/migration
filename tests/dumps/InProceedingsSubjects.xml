@@ -37,22 +37,22 @@
 		<key Table="opus" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="source_opus" Collation="A" Cardinality="1" Null="" Index_type="BTREE" Comment="" />
 		<key Table="opus" Non_unique="1" Key_name="urn" Seq_in_index="1" Column_name="urn" Collation="A" Null="YES" Index_type="BTREE" Comment="" />
 		<key Table="opus" Non_unique="1" Key_name="sachgruppe_ddc" Seq_in_index="1" Column_name="sachgruppe_ddc" Collation="A" Null="YES" Index_type="BTREE" Comment="" />
-		<options Name="opus" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="1" Avg_row_length="260" Data_length="404" Max_data_length="281474976710655" Index_length="4096" Data_free="144" Create_time="2011-02-03 18:25:26" Update_time="2012-01-13 13:52:49" Check_time="2011-02-03 18:25:26" Collation="utf8_unicode_ci" Create_options="" Comment="" />
+		<options Name="opus" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="1" Avg_row_length="312" Data_length="404" Max_data_length="281474976710655" Index_length="4096" Data_free="92" Create_time="2011-02-03 18:25:26" Update_time="2012-06-20 07:49:38" Check_time="2011-02-03 18:25:26" Collation="utf8_unicode_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="opus">
 	<row>
 		<field name="title">Testinproceedings</field>
 		<field name="creator_corporate"></field>
-		<field name="subject_swd"></field>
+		<field name="subject_swd">Unsicherheit , Monsun , Klimatologie</field>
 		<field name="description">Testinproceedings mit deutschen und englischen Schlagworten</field>
 		<field name="publisher_university">Universität XYZ</field>
 		<field name="contributors_name"></field>
 		<field name="contributors_corporate"></field>
 		<field name="date_year">2001</field>
-		<field name="date_creation">1326462744</field>
+		<field name="date_creation">1340178578</field>
 		<field name="date_modified" xsi:nil="true" />
 		<field name="type">16</field>
-		<field name="source_opus">6</field>
+		<field name="source_opus">26</field>
 		<field name="source_title"></field>
 		<field name="source_swb"></field>
 		<field name="language">ger</field>
@@ -73,20 +73,6 @@
 		<field name="bem_intern"></field>
 		<field name="bem_extern"></field>
 		<field name="url" xsi:nil="true" />
-	</row>
-	</table_data>
-	<table_structure name="opus_autor">
-		<field Field="source_opus" Type="int(11)" Null="NO" Key="MUL" Default="0" Extra="" />
-		<field Field="creator_name" Type="varchar(100)" Null="YES" Key="" Extra="" />
-		<field Field="reihenfolge" Type="int(11)" Null="YES" Key="" Extra="" />
-		<key Table="opus_autor" Non_unique="1" Key_name="opusID" Seq_in_index="1" Column_name="source_opus" Collation="A" Null="" Index_type="BTREE" Comment="" />
-		<options Name="opus_autor" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="1" Avg_row_length="24" Data_length="104" Max_data_length="281474976710655" Index_length="2048" Data_free="80" Create_time="2011-02-03 18:25:26" Update_time="2012-01-13 13:52:49" Check_time="2011-02-03 18:25:26" Collation="utf8_unicode_ci" Create_options="" Comment="" />
-	</table_structure>
-	<table_data name="opus_autor">
-	<row>
-		<field name="source_opus">6</field>
-		<field name="creator_name">Doe, John</field>
-		<field name="reihenfolge">1</field>
 	</row>
 	</table_data>
 </database>

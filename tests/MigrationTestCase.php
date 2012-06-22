@@ -55,8 +55,12 @@ class MigrationTestCase extends PHPUnit_Framework_TestCase {
        self::$stepsize = 10;
     }
 
-    protected static function migrate($dumpfile) {
-       exec(self::$script  . " -f \"" . self::$dump_dir . $dumpfile . "\" -p \"" . self::$fulltext_dir . "\" -z " . self::$stepsize, self::$output);
+    protected static function migrate($dumpfile, $testing = false) {
+       if($testing == true) {
+            exec(self::$script  . " -f \"" . self::$dump_dir . $dumpfile . "\" -p \"" . self::$fulltext_dir . "\" -t -z " . self::$stepsize, self::$output);
+       } else {
+            exec(self::$script  . " -f \"" . self::$dump_dir . $dumpfile . "\" -p \"" . self::$fulltext_dir . "\" -z " . self::$stepsize, self::$output);
+       }
     }
 
     protected function assertOutputContainsString($string) {

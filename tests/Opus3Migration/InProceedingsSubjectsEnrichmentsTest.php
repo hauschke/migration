@@ -31,13 +31,13 @@
  * @version     $Id$
  */
 
-class Opus3Migration_InProceedingsSubjectsTest extends MigrationTestCase {
+class Opus3Migration_InProceedingsSubjectsEnrichmentsTest extends MigrationTestCase {
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("InProceedingsSubjects.xml");
+        parent::migrate("InProceedingsSubjects.xml", true);
     }
 
     public function setUp() {
@@ -49,7 +49,7 @@ class Opus3Migration_InProceedingsSubjectsTest extends MigrationTestCase {
         $this->assertEquals($this->doc->getType(), 'conferenceobject');
     }
 
-    /* Test for OPUSVIER-2544 */
+   /* Test for OPUSVIER-2544 */
     public function testSubjectsSwdAsSubjects() {
         $this->assertEquals('deu', $this->doc->getSubject(0)->getLanguage());
         $this->assertEquals('swd', $this->doc->getSubject(0)->getType());
@@ -97,11 +97,23 @@ class Opus3Migration_InProceedingsSubjectsTest extends MigrationTestCase {
         $this->assertEquals('uncontrolled', $this->doc->getSubject(12)->getType());
         $this->assertEquals('keywords', $this->doc->getSubject(12)->getValue());
     }
+    
+    /* Test for OPUSVIER-2544 */
+    public function testSubjectsSwdAsEnrichments() {
+        $this->assertEquals('SubjectSwd', $this->doc->getEnrichment(0)->getKeyName());
+        $this->assertEquals('Unsicherheit , Monsun , Klimatologie', $this->doc->getEnrichment(0)->getValue());
+    }
 
     /* Test for OPUSVIER-2544 */
-    public function testNoMigrationToEnrichments() {
-        $this->assertNull(Opus_EnrichmentKey::fetchByName('SubjectUncontrolledEnglish'));
-        $this->assertNull(Opus_EnrichmentKey::fetchByName('SubjectUncontrolledGerman'));
-        $this->assertNull(Opus_EnrichmentKey::fetchByName('SubjectSwd'));
+    public function testSubjectsUncontrolledGermanAsEnrichments() {
+        $this->assertEquals('SubjectUncontrolledGerman', $this->doc->getEnrichment(1)->getKeyName());
+        $this->assertEquals('das , sind , fünf , freie , schlagworte', $this->doc->getEnrichment(1)->getValue());
     }
+
+    /* Test for OPUSVIER-2544 */
+    public function testSubjectsUncontrolledEnglishAsEnrichments() {
+        $this->assertEquals('SubjectUncontrolledEnglish', $this->doc->getEnrichment(2)->getKeyName());
+        $this->assertEquals('this , are , five , uncontrolled , keywords', $this->doc->getEnrichment(2)->getValue());
+    }
+
 }
