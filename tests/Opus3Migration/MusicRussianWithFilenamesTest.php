@@ -92,6 +92,12 @@ class Opus3Migration_MusicRussianWithFilenamesTest extends MigrationTestCase {
         $this->assertEquals('1', $this->doc->getFile(2)->getVisibleInOai());
     }
 
+    public function testFileAccess() {
+        $guest = Opus_UserRole::fetchByName('guest');
+        $this->assertContains($this->doc->getFile(0)->getId(), $guest->listAccessFiles());
+        $this->assertContains($this->doc->getFile(1)->getId(), $guest->listAccessFiles());
+        $this->assertContains($this->doc->getFile(2)->getId(), $guest->listAccessFiles());
+    }
 
 }
 
