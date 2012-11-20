@@ -305,14 +305,14 @@ Der wesentliche Unterschied zum UB-Vertrag (mit Print-on-Demand) ist, dass hier 
 	</row>
 	<row>
 		<field name="shortname">cc_by</field>
-		<field name="longname" xsi:nil="true" />
+		<field name="longname">Creative Commons - Namensnennung</field>
 		<field name="desc_text">Bei dieser Lizenz darf der Inhalt vervielf&amp;auml;ltigt, verbreitet und &amp;ouml;ffentlich aufgef&amp;uuml;hrt werden, Bearbeitungen angefertigt und der Inhalt kommerziell genutzt werden unter den folgenden Bedingungen: Der Name des Autors/Rechtsinhabers muss genannt werden.
 Dies ist eine Lizenz, die auf der internationalen Creative Commons-Initiative basiert.</field>
-		<field name="active" xsi:nil="true" />
+		<field name="active">1</field>
 		<field name="sort">8</field>
-		<field name="pod_allowed" xsi:nil="true" />
-		<field name="language" xsi:nil="true" />
-		<field name="link" xsi:nil="true" />
+		<field name="pod_allowed">1</field>
+		<field name="language">ger</field>
+		<field name="link">http://creativecommons.org/licenses/by/2.0/de/deed.de</field>
 		<field name="link_tosign">http://&lt;server&gt;/opus/doku/lizenzen/cc_by.pdf</field>
 		<field name="desc_html">&lt;!-- Creative Commons License --&gt;
 
