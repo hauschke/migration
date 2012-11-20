@@ -45,8 +45,8 @@ class Opus3Migration_PaperMscTest extends MigrationTestCase {
         $this->doc = new Opus_Document(1);
     }
 
-    public function testDoctypeStudyThesis() {
-        $this->assertEquals($this->doc->getType(), 'studythesis');
+    public function testDoctypePaper() {
+        $this->assertEquals($this->doc->getType(), 'workingpaper');
     }
 
     public function testCollectionMsc() {
