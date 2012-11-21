@@ -51,7 +51,7 @@
 		<field name="date_year">2012</field>
 		<field name="date_creation">1353334771</field>
 		<field name="date_modified" xsi:nil="true" />
-		<field name="type">31</field>
+		<field name="type">32</field>
 		<field name="source_opus">28</field>
 		<field name="source_title"></field>
 		<field name="source_swb"></field>
