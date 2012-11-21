@@ -31,7 +31,7 @@
  * @version     $Id$
  */
 
-class Opus3Migration_InProceedingsSubjectsEnrichmentsTest extends MigrationTestCase {
+class Opus3Migration_InProceedingsSubjectsEnrichmentsInTestingTest extends MigrationTestCase {
 
     protected $doc;
 

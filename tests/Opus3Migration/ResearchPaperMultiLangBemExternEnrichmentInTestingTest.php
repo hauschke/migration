@@ -31,7 +31,7 @@
  * @version     $Id $
  */
 
-class Opus3Migration_ResearchPaperMultiLangBemExternEnrichmentTest extends MigrationTestCase {
+class Opus3Migration_ResearchPaperMultiLangBemExternEnrichmentInTestingTest extends MigrationTestCase {
 
 
     protected $doc;
