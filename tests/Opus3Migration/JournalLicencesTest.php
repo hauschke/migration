@@ -39,7 +39,7 @@ class Opus3Migration_JournalLicencesTest extends MigrationTestCase {
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("JournalLicences.xml", true);
+        parent::migrate("JournalLicences.xml");
     }
 
     public function setUp() {

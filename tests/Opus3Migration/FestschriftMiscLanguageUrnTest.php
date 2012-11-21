@@ -37,7 +37,7 @@ class Opus3Migration_FestschriftMiscLanguageUrnTest extends MigrationTestCase {
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("FestschriftMiscLanguageUrn.xml", true);
+        parent::migrate("FestschriftMiscLanguageUrn.xml");
     }
     
     public function setUp() {

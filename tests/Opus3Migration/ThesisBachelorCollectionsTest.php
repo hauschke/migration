@@ -38,7 +38,7 @@ class Opus3Migration_ThesisBachelorCollectionsTest extends MigrationTestCase {
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("ThesisBachelorCollections.xml", true);
+        parent::migrate("ThesisBachelorCollections.xml");
     }
 
 

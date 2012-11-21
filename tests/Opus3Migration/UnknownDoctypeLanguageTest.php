@@ -37,7 +37,7 @@ class Opus3Migration_UnknownDoctypeLanguageTest extends MigrationTestCase {
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("UnknownDoctypeLanguage.xml", true);
+        parent::migrate("UnknownDoctypeLanguage.xml");
     }
 
 
