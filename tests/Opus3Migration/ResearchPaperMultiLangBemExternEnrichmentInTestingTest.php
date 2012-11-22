@@ -70,7 +70,7 @@ class Opus3Migration_ResearchPaperMultiLangBemExternEnrichmentInTestingTest exte
         $this->assertEquals('Externe Bemerkung', $this->doc->getEnrichment(0)->getValue());
     }
 
-    public function testNoMigrationToEnrichments() {
+    public function testNoMigrationToPublicNote() {
         $this->assertEquals('0', count($this->doc->getNote()));
     }
 
