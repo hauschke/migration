@@ -45,13 +45,13 @@
  */
 
 
-class Opus3Migration_ThesisDoctoralManyTitleTest extends MigrationTestCase {
+class Opus3Migration_ThesisDoctoralGermanTitleEnTitleDeTest extends MigrationTestCase {
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("ThesisDoctoralManyTitle.xml");
+        parent::migrate("ThesisDoctoralGermanTitleEnTitleDe.xml");
     }
 
     public function setUp() {
