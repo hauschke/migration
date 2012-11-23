@@ -48,10 +48,12 @@ class Opus3Migration_UnknownDoctypeLanguageTest extends MigrationTestCase {
 
     public function testUnknownDoctype() {
         $this->assertEquals('other', $this->doc->getType());
+        $this->assertOutputContainsString("No Mapping for 'type' in Document with value '32' found. Set to default-Value 'other'");
     }
 
     public function testUnknownLanguage() {
         $this->assertEquals('mul', $this->doc->getLanguage());
+        $this->assertOutputContainsString("No Mapping for 'language' in Document with value 'non' found. Set to default-Value 'mul'");
     }
 
 
