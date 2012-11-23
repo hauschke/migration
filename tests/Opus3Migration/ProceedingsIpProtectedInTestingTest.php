@@ -59,11 +59,14 @@ class Opus3Migration_ProceedingsIpProtectedInTestingTest extends MigrationTestCa
         $this->assertEquals($this->doc->getFile(0)->getLabel(), 'Dokument_1.pdf');
     }
 
-    public function testVisibility() {
-        $this->assertEquals($this->doc->getFile(0)->getVisibleInOai(), '0');
+    public function testIpProtetedFileVisibileInFrontdoor() {
         $this->assertEquals($this->doc->getFile(0)->getVisibleInFrontdoor(), '1');
     }
 
+    /* OPUSVIER-2427 */
+    public function testIpProtetedFileNotVisibileInOai() {
+        $this->assertEquals($this->doc->getFile(0)->getVisibleInOai(), '0');
+    }
 
     public function testUserRoles() {
         $this->assertNotNull(Opus_UserRole::fetchByName('guest'));
