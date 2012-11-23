@@ -51,22 +51,22 @@ class Opus3Migration_ThesisBachelorTempSeriesTest extends MigrationTestCase {
     }
 
     public function testLicenceInXmlOutput() {
-        $this->assertOutputContainsString('<Licence Id="12" Active="1" CommentInternal=');
+        $this->assertOutputContainsString('<Licence Id="12" Active="1" CommentInternal="Zus. zu ubt-podok darf hier:&#10;- auch von dritten vervielf&amp;auml;ltigt und verbreitet werden.&#10;Zus&amp;auml;tzlich zu cc_by-nc-nd darf hier ausserdem noch:&#10;- das Werk ver&amp;auml;ndert oder bearbeitet werden&#10;- kommzeriell verwertet werden&#10;&#10;Lediglich die Namensnennung ist zwingend." DescMarkup="&lt;!-- Creative Commons License --&gt;&#10;&#10;&lt;!--&#10;&#10;&lt;rdf:RDF xmlns=&quot;http://web.resource.org/cc/&quot;&#10;    xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot;&#10;    xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;&gt;&#10;&lt;Work rdf:about=&quot;&quot;&gt;&#10;   &lt;dc:type rdf:resource=&quot;http://purl.org/dc/dcmitype/Text&quot; /&gt;&#10;   &lt;license rdf:resource=&quot;http://creativecommons.org/licenses/by/2.0/de/&quot; /&gt;&#10;&lt;/Work&gt;&#10;&#10;&lt;License rdf:about=&quot;http://creativecommons.org/licenses/by/2.0/de/&quot;&gt;&#10;   &lt;permits rdf:resource=&quot;http://web.resource.org/cc/Reproduction&quot; /&gt;&#10;   &lt;permits rdf:resource=&quot;http://web.resource.org/cc/Distribution&quot; /&gt;&#10;   &lt;requires rdf:resource=&quot;http://web.resource.org/cc/Notice&quot; /&gt;&#10;   &lt;requires rdf:resource=&quot;http://web.resource.org/cc/Attribution&quot; /&gt;&#10;   &lt;permits rdf:resource=&quot;http://web.resource.org/cc/DerivativeWorks&quot; /&gt;&#10;&lt;/License&gt;&#10;&#10;&lt;/rdf:RDF&gt;&#10;&#10;--&gt;&#10;" DescText="Bei dieser Lizenz darf der Inhalt vervielfältigt, verbreitet und öffentlich aufgeführt werden, Bearbeitungen angefertigt und der Inhalt kommerziell genutzt werden unter den folgenden Bedingungen: Der Name des Autors/Rechtsinhabers muss genannt werden.&#10;Dies ist eine Lizenz, die auf der internationalen Creative Commons-Initiative basiert." Language="deu" LinkLicence="http://creativecommons.org/licenses/by/2.0/de/deed.de" LinkLogo="http://creativecommons.org/images/public/somerights20.gif" LinkSign="http://&lt;server&gt;/opus/doku/lizenzen/cc_by.pdf" MimeType="text/html" NameLong="Creative Commons - Namensnennung" SortOrder="16" PodAllowed="1"/>');
     }
 
     public function testThesisPublisherInXmlOutput() {
-        $this->assertOutputContainsString('<ThesisPublisher Id="1" Name="Universit&auml;t XYZ" Address="Musterstr. 1, 12345 Musterstadt" City="Ort" DnbContactId="F6000-XXXX" IsGrantor="1" IsPublisher="1"></ThesisPublisher>');
+        $this->assertOutputContainsString('<ThesisPublisher Id="1" Name="Universität XYZ" Address="Musterstr. 1, 12345 Musterstadt" City="Ort" DnbContactId="F6000-XXXX" IsGrantor="1" IsPublisher="1"/>');
     }
 
     public function testCollectionInXmlOutput() {
-        $this->assertOutputContainsString('<Collection Id="112" Number="000" Name="Informatik, Informationswissenschaft, allgemeine Werke" OaiSubset="000" SortOrder="0" RoleId="2" RoleName="ddc" RoleDisplayFrontdoor="Number, Name" RoleVisibleFrontdoor="true" Visible="1" Theme="opus4"></Collection>');
-        $this->assertOutputContainsString('<Collection Id="16205" Name="middle1" SortOrder="0" RoleId="17" RoleName="collections" RoleDisplayFrontdoor="Name" RoleVisibleFrontdoor="true" Visible="1" Theme="opus4"></Collection>');
-        $this->assertOutputContainsString('<Collection Id="16214" Name="Institut 2" SortOrder="0" RoleId="1" RoleName="institutes" RoleDisplayFrontdoor="Name" RoleVisibleFrontdoor="true" Visible="1" Theme="opus4"></Collection>');
+        $this->assertOutputContainsString('<Collection Id="112" Number="000" Name="Informatik, Informationswissenschaft, allgemeine Werke" OaiSubset="000" SortOrder="0" RoleId="2" RoleName="ddc" RoleDisplayFrontdoor="Number, Name" RoleVisibleFrontdoor="true" Visible="1" Theme="opus4"/>');
+        $this->assertOutputContainsString('<Collection Id="16205" Name="middle1" SortOrder="0" RoleId="17" RoleName="collections" RoleDisplayFrontdoor="Name" RoleVisibleFrontdoor="true" Visible="1" Theme="opus4"/>');
+        $this->assertOutputContainsString('<Collection Id="16214" Name="Institut 2" SortOrder="0" RoleId="1" RoleName="institutes" RoleDisplayFrontdoor="Name" RoleVisibleFrontdoor="true" Visible="1" Theme="opus4"/>');
     }
 
     public function testSeriesInXmlOutput() {
-        $this->assertOutputContainsString('<Series Id="4" Title="Zus&auml;tzliche Schriftenreihe" Visible="1" SortOrder="4" Number="111"></Series>');
-        $this->assertOutputContainsString('<Series Id="4" Title="Zus&auml;tzliche Schriftenreihe" Visible="1" SortOrder="4" Number="110"></Series>');
+        $this->assertOutputContainsString('<Series Id="4" Title="Zusätzliche Schriftenreihe" Visible="1" SortOrder="4" Number="111"/>');
+        $this->assertOutputContainsString('<Series Id="4" Title="Zusätzliche Schriftenreihe" Visible="1" SortOrder="4" Number="110"/>');
     }
 
 
