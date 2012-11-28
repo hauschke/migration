@@ -61,11 +61,6 @@ class MigrationTestCase extends PHPUnit_Framework_TestCase {
        } else {
             exec(self::$script  . " -f \"" . self::$dump_dir . $dumpfile . "\" -p \"" . self::$fulltext_dir . "\" -z " . self::$stepsize, self::$output);
        }
-       /*echo "## OUTPUT ##\n";
-       foreach (self::$output as $line) {
-           echo $line . "\n";
-       }
-       echo "##\n";*/
     }
 
     protected function assertOutputContainsString($string) {
