@@ -31,7 +31,7 @@
  * @version     $Id$
  */
 
-class Opus3Migration_TempInconsistentDocumentTest extends MigrationTestCase {
+class Opus3Migration_TempAutorTest extends MigrationTestCase {
 
     protected $doc1;
     protected $doc2;
@@ -39,7 +39,7 @@ class Opus3Migration_TempInconsistentDocumentTest extends MigrationTestCase {
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
         parent::$stepsize = 1;
-        parent::migrate("TempInconsistentDocument.xml");
+        parent::migrate("TempAutor.xml");
     }
 
     public function setUp() {
@@ -47,14 +47,14 @@ class Opus3Migration_TempInconsistentDocumentTest extends MigrationTestCase {
     }
 
     public function testInconsistentXmlDump() {
-        $this->assertOutputContainsString("Consistency check of Opus3-Dump FAILED.");
-        $this->assertOutputContainsString("Opus3-Id:20. Table:temp_autor");
+        $this->assertOutputContainsString("Consistency check of Opus3-Dump FAILED");
+        $this->assertOutputContainsString("Opus3-Id:41. Table:temp_autor");
     }
 
     public function testNumberOfDocuments() {
         $odf = new Opus_DocumentFinder();
-        $this->assertEquals($odf->count(), '0');
+        $this->assertEquals('0', $odf->count());
     }  
 
 }
-?>
+
