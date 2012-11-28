@@ -369,6 +369,11 @@ Lediglich die Namensnennung ist zwingend.</field>
 		<field name="sr_id">4</field>
 		<field name="sequence_nr">111</field>
 	</row>
+	<row>
+		<field name="source_opus">40</field>
+		<field name="sr_id">4</field>
+		<field name="sequence_nr">110</field>
+	</row>
 	</table_data>
 	<table_structure name="opus_coll">
 		<field Field="coll_id" Type="int(10) unsigned" Null="NO" Key="" Default="0" Extra="" />
@@ -404,11 +409,6 @@ Lediglich die Namensnennung ist zwingend.</field>
 		<options Name="temp_schriftenreihe" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="20" Max_data_length="281474976710655" Index_length="3072" Data_free="20" Create_time="2011-02-03 18:24:15" Update_time="2012-11-23 14:14:08" Collation="utf8_unicode_ci" Create_options="" Comment="" />
 	</table_structure>
 	<table_data name="temp_schriftenreihe">
-	<row>
-		<field name="source_opus">40</field>
-		<field name="sr_id">4</field>
-		<field name="sequence_nr">110</field>
-	</row>
 	</table_data>
 </database>
 </mysqldump>

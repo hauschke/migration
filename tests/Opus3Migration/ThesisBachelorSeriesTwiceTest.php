@@ -31,14 +31,14 @@
  * @version     $Id $
  */
 
-class Opus3Migration_ThesisBachelorTempSeriesTest extends MigrationTestCase {
+class Opus3Migration_ThesisBachelorSeriesTwiceTest extends MigrationTestCase {
 
 
     protected $doc;
 
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
-        parent::migrate("ThesisBachelorTempSeries.xml");
+        parent::migrate("ThesisBachelorSeriesTwice.xml");
     }
 
     public function setUp() {
