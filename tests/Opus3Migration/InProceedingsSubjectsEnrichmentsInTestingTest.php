@@ -45,6 +45,13 @@ class Opus3Migration_InProceedingsSubjectsEnrichmentsInTestingTest extends Migra
         $this->doc = new Opus_Document(1);
     }
 
+    /* Regressiontest for OPUSVIER-2699 */
+    public function testNoFileImportWarningsInOutput() {
+        $this->assertOutputNotContainsString("Warning: scandir(): Directory name cannot be empty");
+        $this->assertOutputNotContainsString("Warning: Invalid argument supplied for foreach()");
+        $this->assertOutputNotContainsString("Notice: Undefined variable: result");
+    }
+
     public function testDoctypeConferenceObject() {
         $this->assertEquals($this->doc->getType(), 'conferenceobject');
     }

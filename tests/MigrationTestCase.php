@@ -61,6 +61,11 @@ class MigrationTestCase extends PHPUnit_Framework_TestCase {
        } else {
             exec(self::$script  . " -f \"" . self::$dump_dir . $dumpfile . "\" -p \"" . self::$fulltext_dir . "\" -z " . self::$stepsize, self::$output);
        }
+       /*echo "## OUTPUT ##\n";
+       foreach (self::$output as $line) {
+           echo $line . "\n";
+       }
+       echo "##\n";*/
     }
 
     protected function assertOutputContainsString($string) {
@@ -69,6 +74,14 @@ class MigrationTestCase extends PHPUnit_Framework_TestCase {
            if (strpos($line, $string) !== false) { $outputContainsString = true; }
        }
        $this->assertTrue($outputContainsString);
+    }
+
+    protected function assertOutputNotContainsString($string) {
+       $outputContainsString = false;
+       foreach (self::$output as $line) {
+           if (strpos($line, $string) !== false) { $outputContainsString = true; }
+       }
+       $this->assertFalse($outputContainsString);
     }
 
 }
