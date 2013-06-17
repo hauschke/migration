@@ -80,5 +80,11 @@ class Opus3Migration_ManualTwoDocumentsEqualFilenameTest extends MigrationTestCa
         $this->assertOutputContainsString("File 'foo_bar.pdf' already imported");
     }
 
+    public function testFileLabelWithEqualExtension() {
+        $this->assertEquals('Dokument_1.pdf', $this->doc1->getFile(0)->getLabel());
+        $this->assertEquals('Dokument_1.pdf', $this->doc2->getFile(0)->getLabel());
+        $this->assertEquals('Dokument_2.pdf', $this->doc2->getFile(1)->getLabel());
+    }
+
 }
 ?>
