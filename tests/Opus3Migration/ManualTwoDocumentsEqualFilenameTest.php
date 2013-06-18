@@ -76,8 +76,8 @@ class Opus3Migration_ManualTwoDocumentsEqualFilenameTest extends MigrationTestCa
     }
 
     public function testErrorOutput() {
-        $this->assertOutputNotContainsString("File 'lorem_ipsum.pdf' already imported");
-        $this->assertOutputContainsString("File 'foo_bar.pdf' already imported");
+        $this->assertOutputNotContainsString("File 'pdf/lorem_ipsum.pdf' already imported");
+        $this->assertOutputContainsString("File 'pdf/foo_bar.pdf' already imported");
     }
 
     public function testFileLabelWithEqualExtension() {
