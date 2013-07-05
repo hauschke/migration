@@ -41,14 +41,12 @@ ini_set('display_errors', 1);
 defined('APPLICATION_PATH')
         || define('APPLICATION_PATH', realpath(dirname(dirname(__FILE__))));
 
-
 // Define application environment (use 'production' by default)
 define('APPLICATION_ENV', 'testing');
 
 // Configure include path.
 set_include_path('.' . PATH_SEPARATOR
         . PATH_SEPARATOR . dirname(__FILE__)
-	. PATH_SEPARATOR . dirname(dirname(dirname(__FILE__))) . '/server/scripts/migration'
         . PATH_SEPARATOR . dirname(dirname(__FILE__)) . '/library'
         . PATH_SEPARATOR . get_include_path());
 
@@ -58,12 +56,10 @@ $autoloader = Zend_Loader_Autoloader::getInstance();
 $autoloader->suppressNotFoundWarnings(false);
 $autoloader->setFallbackAutoloader(true);
 
-$application = new Zend_Application(APPLICATION_ENV, 
+$application = new Zend_Application(APPLICATION_ENV,
             array(
                 "config" => array(
-		     realpath(dirname(dirname(dirname(__FILE__)))). '/server/application/configs/migration.ini',
-		     realpath(dirname(dirname(dirname(__FILE__)))). '/server/application/configs/migration_config.ini',
-		     realpath(dirname(__FILE__)) . '/config.ini'
+                    APPLICATION_PATH . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'config.ini'
                 )
             )
         );
