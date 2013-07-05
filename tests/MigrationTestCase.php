@@ -37,6 +37,7 @@
  *
  * @category Tests
  */
+ 
 
 class MigrationTestCase extends PHPUnit_Framework_TestCase {
 
@@ -45,22 +46,34 @@ class MigrationTestCase extends PHPUnit_Framework_TestCase {
     protected static $fulltext_dir;
     protected static $output = array();
     protected static $stepsize;
-
-
+    
     public static function setUpBeforeClass() {
-        // self::$script = dirname(dirname(__FILE__)) . '/migration/opus3-migration.sh';
-       self::$script = dirname(dirname(dirname(__FILE__))) . '/server/scripts/migration/opus3-migration.sh';
        self::$dump_dir = dirname(__FILE__) . '/dumps/';
        self::$fulltext_dir = dirname(__FILE__) . "/fulltexts/";
        self::$stepsize = 10;
     }
 
     protected static function migrate($dumpfile, $testing = false) {
-       if($testing == true) {
-            exec(self::$script  . " -f \"" . self::$dump_dir . $dumpfile . "\" -p \"" . self::$fulltext_dir . "\" -t -z " . self::$stepsize, self::$output);
-       } else {
-            exec(self::$script  . " -f \"" . self::$dump_dir . $dumpfile . "\" -p \"" . self::$fulltext_dir . "\" -z " . self::$stepsize, self::$output);
-       }
+        // manipulate application configuration
+        $oldConfig = Zend_Registry::get('Zend_Config');
+
+        $config = Zend_Registry::get('Zend_Config');
+        $config->migration->file = self::$dump_dir . $dumpfile; 
+        $config->migration->path = self::$fulltext_dir; 
+        Zend_Registry::set('Zend_Config', $config);
+
+	
+       /*if($testing == true) {
+            exec(self::$script  . " -t -z " . self::$stepsize, self::$output);
+	} else {
+            exec(self::$script  . " -z " . self::$stepsize, self::$output);
+	}*/
+	
+	$migration = new Opus3MigrationBatch();
+	$migration->run();
+       
+        // undo configuration manipulation
+        Zend_Registry::set('Zend_Config', $oldConfig);    
     }
 
     protected function assertOutputContainsString($string) {
