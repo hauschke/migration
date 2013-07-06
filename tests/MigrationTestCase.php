@@ -43,6 +43,7 @@ class MigrationTestCase extends PHPUnit_Framework_TestCase {
     protected static $script;
     protected static $dump_dir;
     protected static $fulltext_dir;
+    protected static $fulltext_restricted_dir;
     protected static $output = array();
     protected static $stepsize;
 
@@ -52,15 +53,23 @@ class MigrationTestCase extends PHPUnit_Framework_TestCase {
        self::$script = dirname(dirname(dirname(__FILE__))) . '/server/scripts/migration/opus3-migration.sh';
        self::$dump_dir = dirname(__FILE__) . '/dumps/';
        self::$fulltext_dir = dirname(__FILE__) . "/fulltexts/";
+       self::$fulltext_restricted_dir = dirname(__FILE__) . "/fulltexts_restricted/";
        self::$stepsize = 10;
     }
 
-    protected static function migrate($dumpfile, $testing = false) {
-       if($testing == true) {
-            exec(self::$script  . " -f \"" . self::$dump_dir . $dumpfile . "\" -p \"" . self::$fulltext_dir . "\" -t -z " . self::$stepsize, self::$output);
-       } else {
-            exec(self::$script  . " -f \"" . self::$dump_dir . $dumpfile . "\" -p \"" . self::$fulltext_dir . "\" -z " . self::$stepsize, self::$output);
+    protected static function migrate($dumpfile, $testing = false, $restricted = false) {
+    
+	#echo "FOO";
+       $dir_arg =  " -p \"" . self::$fulltext_dir . "\" ";
+       if ($restricted) {
+         $dir_arg =  " -q \"" . self::$fulltext_dir . " " . self::$fulltext_restricted_dir . "\" ";
+       }  
+       $test_arg = "";
+       if ($testing == true) {
+        $test_arg = " -t";
        }
+       
+	exec(self::$script  . " -f \"" . self::$dump_dir . $dumpfile . "\" " . $dir_arg . $test_arg . " -z " . self::$stepsize, self::$output);
     }
 
     protected function assertOutputContainsString($string) {
