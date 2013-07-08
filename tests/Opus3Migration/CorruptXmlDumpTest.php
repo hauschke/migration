@@ -33,8 +33,6 @@
 
 class Opus3Migration_CorruptXmlDumpTest extends MigrationTestCase {
 
-    protected $doc;
-
     public static function setUpBeforeClass()  {
         parent::setUpBeforeClass();
         parent::migrate("Corrupt.xml");

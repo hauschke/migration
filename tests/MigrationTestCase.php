@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file is part of OPUS. The software OPUS has been originally developed
  * at the University of Stuttgart with funding from the German Research Net,
@@ -37,7 +36,6 @@
  *
  * @category Tests
  */
-
 class MigrationTestCase extends PHPUnit_Framework_TestCase {
 
     protected static $script;
@@ -47,45 +45,46 @@ class MigrationTestCase extends PHPUnit_Framework_TestCase {
     protected static $output = array();
     protected static $stepsize;
 
-
     public static function setUpBeforeClass() {
         // self::$script = dirname(dirname(__FILE__)) . '/migration/opus3-migration.sh';
-       self::$script = dirname(dirname(dirname(__FILE__))) . '/server/scripts/migration/opus3-migration.sh';
-       self::$dump_dir = dirname(__FILE__) . '/dumps/';
-       self::$fulltext_dir = dirname(__FILE__) . "/fulltexts/";
-       self::$fulltext_restricted_dir = dirname(__FILE__) . "/fulltexts_restricted/";
-       self::$stepsize = 10;
+        self::$script = dirname(dirname(dirname(__FILE__))) . '/server/scripts/migration/opus3-migration.sh';
+        self::$dump_dir = dirname(__FILE__) . '/dumps/';
+        self::$fulltext_dir = dirname(__FILE__) . "/fulltexts/";
+        self::$fulltext_restricted_dir = dirname(__FILE__) . "/fulltexts_restricted/";
+        self::$stepsize = 10;
     }
 
     protected static function migrate($dumpfile, $testing = false, $restricted = false) {
-    
-	#echo "FOO";
-       $dir_arg =  " -p \"" . self::$fulltext_dir . "\" ";
-       if ($restricted) {
-         $dir_arg =  " -q \"" . self::$fulltext_dir . " " . self::$fulltext_restricted_dir . "\" ";
-       }  
-       $test_arg = "";
-       if ($testing == true) {
-        $test_arg = " -t";
-       }
-       
-	exec(self::$script  . " -f \"" . self::$dump_dir . $dumpfile . "\" " . $dir_arg . $test_arg . " -z " . self::$stepsize, self::$output);
+        $dir_arg = " -p \"" . self::$fulltext_dir . "\" ";
+        if ($restricted) {
+            $dir_arg = " -q \"" . self::$fulltext_dir . " " . self::$fulltext_restricted_dir . "\" ";
+        }
+        $test_arg = "";
+        if ($testing == true) {
+            $test_arg = " -t";
+        }
+        
+        exec(self::$script . " -f \"" . self::$dump_dir . $dumpfile . "\" " . $dir_arg . $test_arg . " -z " . self::$stepsize, self::$output);
     }
 
     protected function assertOutputContainsString($string) {
-       $outputContainsString = false;
-       foreach (self::$output as $line) {
-           if (strpos($line, $string) !== false) { $outputContainsString = true; }
-       }
-       $this->assertTrue($outputContainsString);
+        $outputContainsString = false;
+        foreach (self::$output as $line) {
+            if (strpos($line, $string) !== false) {
+                $outputContainsString = true;
+            }
+        }
+        $this->assertTrue($outputContainsString);
     }
 
     protected function assertOutputNotContainsString($string) {
-       $outputContainsString = false;
-       foreach (self::$output as $line) {
-           if (strpos($line, $string) !== false) { $outputContainsString = true; }
-       }
-       $this->assertFalse($outputContainsString);
+        $outputContainsString = false;
+        foreach (self::$output as $line) {
+            if (strpos($line, $string) !== false) {
+                $outputContainsString = true;
+            }
+        }
+        $this->assertFalse($outputContainsString);
     }
 
 }
