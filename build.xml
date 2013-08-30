@@ -53,13 +53,13 @@
         </copy>
 
         <!-- Prepare main configuration. Needed for scripts like SolrIndexBuilder. -->
-        <copy file="${basedir}/application/configs/config.ini.template"
-              toFile="${basedir}/application/configs/config.ini" filtering="true" overwrite="true">
+        <copy file="${serverdir}/application/configs/config.ini.template"
+              toFile="${serverdir}/application/configs/config.ini" filtering="true" overwrite="true">
             <filterset filtersFile="${configfile}" />
         </copy>
 
-        <copy file="${basedir}/application/configs/migration_config.ini.template"
-              toFile="${basedir}/application/configs/migration_config.ini" overwrite="true" />
+        <copy file="${serverdir}/application/configs/migration_config.ini.template"
+              toFile="${serverdir}/application/configs/migration_config.ini" overwrite="true" />
     </target>
 
     <target name="prepare-createdb">
