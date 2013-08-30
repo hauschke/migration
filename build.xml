@@ -14,9 +14,8 @@
         <delete dir="${basedir}/build/logs" />
         <delete dir="${basedir}/build/coverage" />
 
-        <!-- Remove workspace/temp directories -->
         <delete includeEmptyDirs="true">
-            <fileset dir="${basedir}/server/workspace/tmp" includes="**/*" />
+            <fileset dir="${serverdir}/workspace/tmp" includes="**/*" />
         </delete>
     </target>
 
