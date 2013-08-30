@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="opus4migration" default="build">
-    
-    <target name="build" depends="clean,lint,phpmd,phpcpd,phpunit"/>
+
+    <property environment="env" />
+    <property name="workspace" value="${env.WORKSPACE}" /><!-- Wird von Jenkins gesetzt. -->
+    <property name="configfile" location="${workspace}/../opus-config.properties" />
+    <property name="frameworkdir" location="${basedir}/../framework" />
+    <property name="serverdir" location="${basedir}/../server" />
+    <property name="libsdir" location="/home/opus4ci/libs" />
+
+    <target name="build" depends="prepare,lint,phpunit"/>
   
     <target name="clean">
         <delete dir="${basedir}/build/logs" />
@@ -9,12 +16,52 @@
 
         <!-- Remove workspace/temp directories -->
         <delete includeEmptyDirs="true">
-            <fileset dir="${basedir}/server/workspace" />
+            <fileset dir="${basedir}/server/workspace/tmp" includes="**/*" />
         </delete>
     </target>
-    
+
+    <target name="setup" depends="prepare-dependencies,prepare-config,prepare-createdb" />
+
+    <target name="prepare-dependencies">
+        <!-- Links für Server -->
+        <symlink link="${basedir}/db/schema" resource="${frameworkdir}/db/schema" failonerror="false" />
+        <symlink link="${basedir}/library/Opus" resource="${frameworkdir}/library/Opus" failonerror="false" />
+        <symlink link="${basedir}/library/Zend" resource="${libsdir}/ZendFramework/library/Zend" failonerror="false" />
+        <symlink link="${basedir}/library/Apache" resource="${libsdir}/SolrPhpClient/Apache" failonerror="false" />
+
+        <!-- Links für Migration -->
+        <symlink link="${basedir}/library/Opus" resource="${frameworkdir}/library/Opus" failonerror="false" />
+        <symlink link="${basedir}/library/Zend" resource="${libsdir}/ZendFramework/library/Zend" failonerror="false" />
+    </target>
+
+    <target name="prepare-config" description="Prepares the configuration files">
+        <!-- Prepare test configuration. -->
+        <copy file="${basedir}/tests/config.ini.template" toFile="${basedir}/tests/config.ini" filtering="true"
+              overwrite="true">
+            <filterset filtersFile="${configfile}" />
+        </copy>
+
+        <!-- Prepare main configuration. Needed for scripts like SolrIndexBuilder. -->
+        <copy file="${basedir}/application/configs/config.ini.template"
+              toFile="${basedir}/application/configs/config.ini" filtering="true" overwrite="true">
+            <filterset filtersFile="${configfile}" />
+        </copy>
+
+        <copy file="${basedir}/application/configs/migration_config.ini.template"
+              toFile="${basedir}/application/configs/migration_config.ini" overwrite="true" />
+    </target>
+
+    <target name="prepare-createdb">
+        <copy file="${serverdir}/db/createdb.sh.template"
+              toFile="${serverdir}/db/createdb.sh" filtering="true" overwrite="true">
+            <filterset filtersFile="${configfile}" />
+        </copy>
+        <chmod file="${serverdir}/db/createdb.sh" perm="+x" />
+    </target>
+
     <target name="prepare" depends="clean">
-        
+        <mkdir dir="${basedir}/build/logs" />
+        <mkdir dir="${basedir}/build/coverage" />
     </target>
 
     <target name="lint">
@@ -22,22 +69,23 @@
             <arg line="-l"/>
             <fileset dir="${basedir}" followsymlinks="false">
                 <include name="**/*.php"/>
+                <modified />
             </fileset>
         </apply>
     </target>
 
-    <target name="phpmd">
-        <exec executable="phpmd" dir="${basedir}/source" logerror="on" output="${basedir}/build/logs/phpunit-pmd.xml" >
-            <arg line="${basedir}/server/scripts/migration xml codesize,unusedcode,naming,design "/>
+    <target name="phpmd"> <!-- TODO leave it to server builds? -->
+        <exec executable="phpmd" dir="${basedir}" logerror="on" output="${basedir}/build/logs/phpunit-pmd.xml" >
+            <arg line="${serverdir}/scripts/migration xml codesize,unusedcode,naming,design "/>
         </exec>
     </target> 
   
-    <target name="phpcpd">
+    <target name="phpcpd"> <!-- TODO leave it to server builds? -->
         <exec executable="phpcpd" dir="${basedir}" logerror="on" >
             <arg line="--min-lines 3" />
             <arg line="--min-tokens 30" />
             <arg line="--log-pmd ${basedir}/build/logs/phpunit-cpd-details.xml" />
-            <arg line="${basedir}/server/scripts/migration" />
+            <arg line="${serverdir}/scripts/migration" />
         </exec>
     </target> 
   

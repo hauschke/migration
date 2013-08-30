@@ -35,9 +35,9 @@
 ;DB SETTINGS
 ; db.params.host     = localhost
 ; db.params.port     = 3306
-db.params.username =
-db.params.password =
-db.params.dbname   =
+db.params.username =@db.user.name@
+db.params.password =@db.user.password@
+db.params.dbname   =@db.name@
 
 ;PHP SETTINGS - enable error reporting
 phpSettings.display_startup_errors = 1
