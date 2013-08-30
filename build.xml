@@ -41,6 +41,7 @@
         <symlink link="${serverdir}/library/Apache" resource="${libsdir}/SolrPhpClient/Apache" failonerror="false" />
 
         <!-- Links für Migration -->
+        <mkdir dir="${basedir}/library" />
         <symlink link="${basedir}/library/Opus" resource="${frameworkdir}/library/Opus" failonerror="false" />
         <symlink link="${basedir}/library/Zend" resource="${libsdir}/ZendFramework/library/Zend" failonerror="false" />
     </target>
