@@ -35,10 +35,10 @@
 
     <target name="prepare-dependencies">
         <!-- Links für Server -->
-        <symlink link="${basedir}/db/schema" resource="${frameworkdir}/db/schema" failonerror="false" />
-        <symlink link="${basedir}/library/Opus" resource="${frameworkdir}/library/Opus" failonerror="false" />
-        <symlink link="${basedir}/library/Zend" resource="${libsdir}/ZendFramework/library/Zend" failonerror="false" />
-        <symlink link="${basedir}/library/Apache" resource="${libsdir}/SolrPhpClient/Apache" failonerror="false" />
+        <symlink link="${serverdir}/db/schema" resource="${frameworkdir}/db/schema" failonerror="false" />
+        <symlink link="${serverdir}/library/Opus" resource="${frameworkdir}/library/Opus" failonerror="false" />
+        <symlink link="${serverdir}/library/Zend" resource="${libsdir}/ZendFramework/library/Zend" failonerror="false" />
+        <symlink link="${serverdir}/library/Apache" resource="${libsdir}/SolrPhpClient/Apache" failonerror="false" />
 
         <!-- Links für Migration -->
         <symlink link="${basedir}/library/Opus" resource="${frameworkdir}/library/Opus" failonerror="false" />
