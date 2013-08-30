@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="opus4migration" default="build">
+    
+    <target name="build" depends="clean,lint,phpmd,phpcpd,phpunit"/>
+  
+    <target name="clean">
+        <delete dir="${basedir}/build/logs" />
+        <delete dir="${basedir}/build/coverage" />
+
+        <!-- Remove workspace/temp directories -->
+        <delete includeEmptyDirs="true">
+            <fileset dir="${basedir}/server/workspace" />
+        </delete>
+    </target>
+    
+    <target name="prepare" depends="clean">
+        
+    </target>
+
+    <target name="lint">
+        <apply executable="php" dir="${basedir}" failonerror="on" logerror="on">
+            <arg line="-l"/>
+            <fileset dir="${basedir}" followsymlinks="false">
+                <include name="**/*.php"/>
+            </fileset>
+        </apply>
+    </target>
+
+    <target name="phpmd">
+        <exec executable="phpmd" dir="${basedir}/source" logerror="on" output="${basedir}/build/logs/phpunit-pmd.xml" >
+            <arg line="${basedir}/server/scripts/migration xml codesize,unusedcode,naming,design "/>
+        </exec>
+    </target> 
+  
+    <target name="phpcpd">
+        <exec executable="phpcpd" dir="${basedir}" logerror="on" >
+            <arg line="--min-lines 3" />
+            <arg line="--min-tokens 30" />
+            <arg line="--log-pmd ${basedir}/build/logs/phpunit-cpd-details.xml" />
+            <arg line="${basedir}/server/scripts/migration" />
+        </exec>
+    </target> 
+  
+    <target name="phpunit">
+        <exec executable="phpunit" dir="${basedir}/tests" failonerror="on">
+            <arg line=" --log-junit ${basedir}/build/logs/phpunit.xml" />
+            <arg line="--coverage-clover ${basedir}/build/logs/phpunit.coverage.xml" />
+            <arg line="--coverage-html ${basedir}/build/coverage" />
+            <arg line="--configuration phpunit.xml . " />
+        </exec>                                                                                                                                                                                                        
+    </target>
+  
+</project>
