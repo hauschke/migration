@@ -17,6 +17,10 @@
         <delete includeEmptyDirs="true">
             <fileset dir="${serverdir}/workspace/tmp" includes="**/*" />
         </delete>
+
+        <delete includeEmptyDirs="true">
+            <fileset dir="${basedir}/tests/workspace/cache" includes="**/*" />
+        </delete>
     </target>
 
     <target name="setup" depends="prepare-dependencies,prepare-config,prepare-createdb" />
