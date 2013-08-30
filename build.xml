@@ -25,6 +25,10 @@
         <delete includeEmptyDirs="true">
             <fileset dir="${basedir}/tests/workspace/log" includes="**/*" />
         </delete>
+
+        <delete includeEmptyDirs="true">
+            <fileset dir="${serverdir}/scripts/migration/log" includes="**/*" />
+        </delete>
     </target>
 
     <target name="setup" depends="prepare-dependencies,prepare-config,prepare-createdb" />
