@@ -21,7 +21,7 @@
 
         <!-- Define directories to include. -->
         <whitelist>
-            <directory suffix=".php">../library/Opus</directory>
+            <directory suffix=".php">../scripts/migration</directory>
             <exclude>
                 <!-- <file>../library/Opus/...</file> -->
             </exclude>
