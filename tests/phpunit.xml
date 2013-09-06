@@ -16,13 +16,15 @@
     <filter>
         <!-- Per default, skip all files. -->
         <blacklist>
-            <directory suffix=".php">../..</directory>
+            <directory suffix=".php">../library/Opus</directory>
+            <directory suffix=".php">../library/Zend</directory>
         </blacklist>
 
-        <!-- TODO figure out how to include just the migration files, without producing error -->
-        <!--whitelist>
-            <directory suffix=".php">../../server/scripts/migration</directory>
-        </whitelist-->
+        <!-- TODO Commented out line would work, but throws exception. Why? -->
+        <whitelist>
+            <!--directory suffix=".php">../../server/scripts/migration</directory-->
+            <directory suffix=".php">.</directory>
+        </whitelist>
     </filter>
 
 </phpunit>
