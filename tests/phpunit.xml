@@ -19,10 +19,10 @@
             <directory suffix=".php">../..</directory>
         </blacklist>
 
-        <!-- Define directories to include. -->
-        <whitelist>
+        <!-- TODO figure out how to include just the migration files, without producing error -->
+        <!--whitelist>
             <directory suffix=".php">../../server/scripts/migration</directory>
-        </whitelist>
+        </whitelist-->
     </filter>
 
 </phpunit>
