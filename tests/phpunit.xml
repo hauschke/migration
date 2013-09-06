@@ -16,13 +16,13 @@
     <filter>
         <!-- Per default, skip all files. -->
         <blacklist>
-            <directory suffix=".php">../library</directory>
+            <directory suffix=".php">../..</directory>
         </blacklist>
 
         <!-- Define directories to include. -->
-        <!--whitelist>
+        <whitelist>
             <directory suffix=".php">../../server/scripts/migration</directory>
-        </whitelist-->
+        </whitelist>
     </filter>
 
 </phpunit>
