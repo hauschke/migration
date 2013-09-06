@@ -20,9 +20,9 @@
         </blacklist>
 
         <!-- Define directories to include. -->
-        <whitelist>
+        <!--whitelist>
             <directory suffix=".php">../../server/scripts/migration</directory>
-        </whitelist>
+        </whitelist-->
     </filter>
 
 </phpunit>
