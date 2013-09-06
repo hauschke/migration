@@ -105,7 +105,8 @@ class Opus3Migration_ThesisHabilitationInstituteTest extends MigrationTestCase {
 
     public function testDnbInstituteFaculty() {
         $dnbinst = new Opus_DnbInstitute(2);
-        $this->assertEquals($dnbinst->getName(), 'Universität XYZ,Fakultät Test 1');
+        $this->assertEquals('Universität XYZ', $dnbinst->getName());
+        $this->assertEquals( 'Fakultät Test 1', $dnbinst->getDepartment());
         $this->assertNull($dnbinst->getAddress());
         $this->assertEquals($dnbinst->getCity(), 'Ort');
         $this->assertNull($dnbinst->getDnbContactId());
@@ -120,7 +121,9 @@ class Opus3Migration_ThesisHabilitationInstituteTest extends MigrationTestCase {
     }
     
     public function testThesisGrantor() {
-        $this->assertEquals($this->doc->getThesisGrantor(0)->getName(), 'Universität XYZ,Fakultät Test 2');
+        $this->assertEquals('Universität XYZ', $this->doc->getThesisGrantor(0)->getName());
+
+        $this->assertEquals('Fakultät Test 2', $this->doc->getThesisGrantor(0)->getDepartment());
         $this->assertEquals($this->doc->getThesisGrantor(0)->getCity(), 'Ort');
     }
 
