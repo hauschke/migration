@@ -127,10 +127,16 @@ class Opus3Migration_MiscFilesWithCommentsAndHierarchyTest extends MigrationTest
         $this->assertEquals('0', $this->doc->getFile(2)->getVisibleInFrontdoor());
     }
 
+    /**
+     * Changed according to OPUSVIER-3223, confirms fix
+     */
     public function testVisibleInOaiNonProtectedFiles() {
         $this->assertEquals('1', $this->doc->getFile(0)->getVisibleInOai());
-        $this->assertEquals('1', $this->doc->getFile(1)->getVisibleInOai());
-        $this->assertEquals('1', $this->doc->getFile(2)->getVisibleInOai());
+        
+        /* files from folder "original" should not be visible in OAI, see OPUSVIER-3223 */
+        $this->assertEquals('0', $this->doc->getFile(1)->getVisibleInOai());
+        $this->assertEquals('0', $this->doc->getFile(2)->getVisibleInOai());
+        
         $this->assertEquals('1', $this->doc->getFile(3)->getVisibleInOai());
         $this->assertEquals('1', $this->doc->getFile(4)->getVisibleInOai());
     }
