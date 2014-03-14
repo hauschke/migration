@@ -59,9 +59,9 @@ class Opus3Migration_ThesisBachelorSeriesTwiceTest extends MigrationTestCase {
     }
 
     public function testCollectionInXmlOutput() {
-        $this->assertOutputContainsString('<Collection Id="112" Number="000" Name="Informatik, Informationswissenschaft, allgemeine Werke" OaiSubset="000" SortOrder="0" RoleId="2" RoleName="ddc" RoleDisplayFrontdoor="Number, Name" RoleVisibleFrontdoor="true" Visible="1" Theme="opus4"/>');
-        $this->assertOutputContainsString('<Collection Id="16205" Name="middle1" SortOrder="0" RoleId="17" RoleName="collections" RoleDisplayFrontdoor="Name" RoleVisibleFrontdoor="true" Visible="1" Theme="opus4"/>');
-        $this->assertOutputContainsString('<Collection Id="16214" Name="Institut 2" SortOrder="0" RoleId="1" RoleName="institutes" RoleDisplayFrontdoor="Name" RoleVisibleFrontdoor="true" Visible="1" Theme="opus4"/>');
+        $this->assertOutputContainsString('<Collection Id="112" Number="000" Name="Informatik, Informationswissenschaft, allgemeine Werke" OaiSubset="000" SortOrder="0" RoleId="2" RoleName="ddc" RoleDisplayFrontdoor="Number, Name" RoleVisibleFrontdoor="true" DisplayFrontdoor="0 Informatik, Informationswissenschaft, allgemeine Werke / 00 Informatik, Wissen, Systeme / 000 Informatik, Informationswissenschaft, allgemeine Werke" Visible="1" Theme="opus4"/>');
+        $this->assertOutputContainsString('<Collection Id="16205" Name="middle1" SortOrder="0" RoleId="17" RoleName="collections" RoleDisplayFrontdoor="Name" RoleVisibleFrontdoor="true" DisplayFrontdoor="top / middle1" Visible="1" Theme="opus4"/>');
+        $this->assertOutputContainsString('<Collection Id="16214" Name="Institut 2" SortOrder="0" RoleId="1" RoleName="institutes" RoleDisplayFrontdoor="Name" RoleVisibleFrontdoor="true" DisplayFrontdoor="Fakultät Test 2 / Institut 2" Visible="1" Theme="opus4"/>');
     }
 
     public function testSeriesInXmlOutput() {
