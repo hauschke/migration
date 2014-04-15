@@ -74,7 +74,7 @@ class MigrationTestCase extends PHPUnit_Framework_TestCase {
                 $outputContainsString = true;
             }
         }
-        $this->assertTrue($outputContainsString, self::$output);
+        $this->assertTrue($outputContainsString);
     }
 
     protected function assertOutputNotContainsString($string) {
