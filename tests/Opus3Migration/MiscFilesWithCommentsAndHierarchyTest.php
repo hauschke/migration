@@ -64,7 +64,7 @@ class Opus3Migration_MiscFilesWithCommentsAndHierarchyTest extends MigrationTest
     public function testFileSize() {
         $this->assertEquals('704', $this->doc->getFile(0)->getFileSize());
         $this->assertEquals('8817', $this->doc->getFile(1)->getFileSize());
-       $this->assertEquals('8817', $this->doc->getFile(2)->getFileSize());
+        $this->assertEquals('8817', $this->doc->getFile(2)->getFileSize());
         $this->assertEquals('8817', $this->doc->getFile(3)->getFileSize());
         $this->assertEquals('12212', $this->doc->getFile(4)->getFileSize());
     }
@@ -98,8 +98,11 @@ class Opus3Migration_MiscFilesWithCommentsAndHierarchyTest extends MigrationTest
         $this->assertEquals('original_foo_lorem_ipsum.pdf', $this->doc->getFile(1)->getPathName());
     }
 
+    /**
+     * Changed according to OPUSVIER-3342.
+     */
     public function testLabelOrdinaryFiles() {
-        $this->assertEquals('Dokument_1.html', $this->doc->getFile(0)->getLabel());
+        $this->assertEquals('', $this->doc->getFile(0)->getLabel());
         $this->assertEquals('Dokument_1.pdf', $this->doc->getFile(3)->getLabel());
         $this->assertEquals('Dokument_1.ps', $this->doc->getFile(4)->getLabel());
     }
@@ -117,21 +120,25 @@ class Opus3Migration_MiscFilesWithCommentsAndHierarchyTest extends MigrationTest
 
     /* OPUSVIER-1518 */
     public function testVisibleInFrontdoorOrdinaryFiles() {
-        $this->assertEquals('1', $this->doc->getFile(0)->getVisibleInFrontdoor());
         $this->assertEquals('1', $this->doc->getFile(3)->getVisibleInFrontdoor());
         $this->assertEquals('1', $this->doc->getFile(4)->getVisibleInFrontdoor());
     }
 
+    /**
+     * Changed according to OPUSVIER-3342.
+     */
     public function testNotVisibleInFrontdoorOriginalFiles() {
+        $this->assertEquals('0', $this->doc->getFile(0)->getVisibleInFrontdoor());
         $this->assertEquals('0', $this->doc->getFile(1)->getVisibleInFrontdoor());
         $this->assertEquals('0', $this->doc->getFile(2)->getVisibleInFrontdoor());
     }
 
     /**
      * Changed according to OPUSVIER-3223, confirms fix
+     * Changed again, see OPUSVIER-3342.
      */
     public function testVisibleInOaiNonProtectedFiles() {
-        $this->assertEquals('1', $this->doc->getFile(0)->getVisibleInOai());
+        $this->assertEquals('0', $this->doc->getFile(0)->getVisibleInOai());
         
         /* files from folder "original" should not be visible in OAI, see OPUSVIER-3223 */
         $this->assertEquals('0', $this->doc->getFile(1)->getVisibleInOai());
@@ -143,7 +150,7 @@ class Opus3Migration_MiscFilesWithCommentsAndHierarchyTest extends MigrationTest
 
     public function testFileAccessNonProtectedFiles() {
         $guest = Opus_UserRole::fetchByName('guest');
-        $this->assertContains($this->doc->getFile(0)->getId(), $guest->listAccessFiles());
+        $this->assertNotContains($this->doc->getFile(0)->getId(), $guest->listAccessFiles());
         $this->assertContains($this->doc->getFile(1)->getId(), $guest->listAccessFiles());
         $this->assertContains($this->doc->getFile(2)->getId(), $guest->listAccessFiles());
         $this->assertContains($this->doc->getFile(3)->getId(), $guest->listAccessFiles());
