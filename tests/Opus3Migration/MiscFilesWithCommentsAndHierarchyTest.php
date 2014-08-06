@@ -148,11 +148,14 @@ class Opus3Migration_MiscFilesWithCommentsAndHierarchyTest extends MigrationTest
         $this->assertEquals('1', $this->doc->getFile(4)->getVisibleInOai());
     }
 
+    /**
+     * Changed according to OPUSVIER-3342 and OPUSVIER-3349.
+     */
     public function testFileAccessNonProtectedFiles() {
         $guest = Opus_UserRole::fetchByName('guest');
         $this->assertNotContains($this->doc->getFile(0)->getId(), $guest->listAccessFiles());
-        $this->assertContains($this->doc->getFile(1)->getId(), $guest->listAccessFiles());
-        $this->assertContains($this->doc->getFile(2)->getId(), $guest->listAccessFiles());
+        $this->assertNotContains($this->doc->getFile(1)->getId(), $guest->listAccessFiles());
+        $this->assertNotContains($this->doc->getFile(2)->getId(), $guest->listAccessFiles());
         $this->assertContains($this->doc->getFile(3)->getId(), $guest->listAccessFiles());
         $this->assertContains($this->doc->getFile(4)->getId(), $guest->listAccessFiles());
     }
