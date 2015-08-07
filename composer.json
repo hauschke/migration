@@ -1,0 +1,19 @@
+{
+  "name": "opus4-repo/migration",
+  "description": "Opus 3 to 4 migration scripts.",
+  "license": "GPL-2.0+",
+  "type": "library",
+  "keywords": [
+    "opus4",
+    "migration",
+    "opus3"
+  ],
+  "homepage": "http://opus4.kobv.de",
+  "require": {
+    "opus4-repo/framework": "dev-master",
+    "zendframework/zendframework1": "1.12.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.2.*"
+  }
+}
